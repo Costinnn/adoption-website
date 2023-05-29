@@ -1,0 +1,98 @@
+$main-bg: #0e60ff;
+$main-bg2: #9e3bff;
+$second-bg: #8fa5ff;
+$second-bg2: #c397ff;
+$third-bg: #e9f0ff;
+$third-bg2: #f8f7ff;
+$blue: #2967be;
+$orange: #ff8e34;
+$gray: #8d918d;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin-top: 100px !important;
+}
+
+.app {
+  width: calc(100vw - (100vw - 100%));
+  overflow-x: hidden;
+}
+
+// GENERAL STYLES
+h1 {
+  text-align: center;
+  color: $second-bg;
+}
+
+// CHANGE PREDEFINED STYLES
+li {
+  list-style: none;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: black;
+  text-decoration: none;
+}
+
+// GENERAL PAGE LAYOUT
+.section-wide {
+  width: 100%;
+}
+
+.section-narrow,
+.content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto 0 auto;
+}
+
+//BUTTONS STYLE
+
+.button1 {
+  padding: 5px 20px;
+  border-radius: 10px;
+  background-color: $orange;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  margin-top: 50px;
+}
+
+.button2 {
+  padding: 5px 20px;
+  background-color: transparent;
+  color: $gray;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid $gray;
+  margin-top: 50px;
+}
+
+.acc-link {
+  display: block;
+  padding: 10px 20px 5px 20px;
+  margin-top: 5px;
+  border-bottom: 1px solid $gray;
+  color: $gray !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.redirect-link {
+  display: block;
+  text-align: center;
+  color: $blue !important;
+  text-decoration: underline !important;
+  margin-top: 30px;
+}

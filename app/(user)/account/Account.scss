@@ -1,0 +1,22 @@
+@use "../../globals.scss";
+
+.account-page {
+  h1 {
+    text-align: left;
+    margin-left: 20px;
+    color: globals.$main-bg;
+  }
+  h2 {
+    margin-left: 20px;
+    color: globals.$second-bg;
+    margin-top: 30px;
+  }
+  .button1 {
+    padding: 10px 30px;
+  }
+  .button1,
+  .button2 {
+    display: block;
+    margin: 20px auto;
+  }
+}

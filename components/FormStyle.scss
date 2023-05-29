@@ -1,0 +1,93 @@
+@use "../app/globals.scss";
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  color: globals.$blue;
+  margin-top: 20px;
+
+  label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  input,
+  textarea,
+  select {
+    max-width: 100%;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: 1px solid globals.$third-bg;
+    background: linear-gradient(globals.$third-bg, globals.$third-bg2);
+    outline: none;
+    font-weight: 600;
+    color: globals.$gray;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  select {
+    padding: 2px;
+  }
+
+  .group-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    > select {
+      margin-top: 10px;
+    }
+
+    > div {
+      margin-top: 10px;
+      max-width: calc(50% - 5px);
+    }
+  }
+
+  .images-input {
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid globals.$third-bg;
+    background: linear-gradient(globals.$third-bg, globals.$third-bg2);
+
+    label {
+      display: block;
+      max-width: 100%;
+      text-align: center;
+    }
+    #images {
+      visibility: hidden;
+    }
+    .images-display {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      .img-box {
+        position: relative;
+
+        span {
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 20px;
+          width: 20px;
+          background-color: globals.$third-bg;
+          border-radius: 50%;
+          font-weight: 600;
+          color: globals.$gray;
+        }
+        img {
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+}

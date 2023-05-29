@@ -1,0 +1,43 @@
+.categories {
+  padding: 0 10px;
+  h2 {
+    padding-top: 10px;
+  }
+  .container {
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 13px;
+      img {
+        border-radius: 50%;
+      }
+    }
+    .item:nth-of-type(2) {
+      img {
+        background-color: #5296a5;
+      }
+    }
+    .item:nth-of-type(3) {
+      img {
+        background-color: #f4acb7;
+      }
+    }
+    .item:nth-of-type(4) {
+      img {
+        background-color: #7371fc;
+      }
+    }
+    .item:nth-of-type(5) {
+      img {
+        background-color: #c68866;
+      }
+    }
+  }
+}
