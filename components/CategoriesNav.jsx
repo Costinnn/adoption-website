@@ -4,11 +4,11 @@ import bird from "../public/images/categories/bird.png";
 import rodent from "../public/images/categories/rodent.png";
 import shelter from "../public/images/categories/shelter.png";
 
-import "./Categories.scss";
+import "./CategoriesNav.scss";
 import Image from "next/image";
 import Link from "next/link";
 
-const Categories = () => {
+const CategoriesNav = () => {
   return (
     <div className="categories section-narrow">
       <h2>Categorii</h2>
@@ -17,20 +17,20 @@ const Categories = () => {
           <Image src={shelter} alt="dog" width={80} />
           Adaposturi
         </Link>
-        <Link href="" className="item">
+        <Link href="/categories/Catel" className="item">
           <Image src={dog} alt="dog" width={80} />
-          Catei
+          Caini
         </Link>
-        <Link href="" className="item">
-          <Image src={cat} alt="dog" width={80} />
+        <Link href="/categories/Pisica" className="item">
+          <Image src={cat} alt="cat" width={80} />
           Pisici
         </Link>
-        <Link href="" className="item">
-          <Image src={bird} alt="dog" width={80} />
+        <Link href="/categories/Pasare" className="item">
+          <Image src={bird} alt="bird" width={80} />
           Pasari
         </Link>
-        <Link href="" className="item">
-          <Image src={rodent} alt="dog" width={80} />
+        <Link href="/categories/Rozatoare" className="item">
+          <Image src={rodent} alt="rodent" width={80} />
           Rozatoare
         </Link>
       </div>
@@ -38,4 +38,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default CategoriesNav;

@@ -7,12 +7,16 @@ import female from "../../public/icons/female.png";
 import pin from "../../public/icons/pin.png";
 import breed from "../../public/icons/breed.png";
 import category from "../../public/icons/category.png";
+
+import Link from "next/link";
+
 import "./Post.scss";
 
 const Post = ({ data }) => {
+  
   return (
-    <div className="post-item">
-      <Image src={data.images[0]} alt={data.title} width={100} height={100}/>
+    <Link href={`/post/${data.id}`} className="post-item">
+      <Image src={data.images[0]} alt={data.title} width={100} height={100} />
       <div className="info">
         <div className="row1">
           <span>{data.title}</span>
@@ -41,7 +45,7 @@ const Post = ({ data }) => {
           <span>{data.city}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

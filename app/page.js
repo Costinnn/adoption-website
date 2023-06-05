@@ -1,13 +1,16 @@
-import Categories from "@/components/Categories";
+import CategoriesNav from "@/components/CategoriesNav";
 import PostList from "@/components/PostList";
+import { getDbPosts } from "@/lib/getDbPosts";
 
-import  './page.scss'
+import "./page.scss";
 
-export default function Home() {
+// HOMEPAGE
+export default async function Home() {
+  const posts = await getDbPosts();
   return (
-    <main >
-      <Categories />
-      <PostList />
+    <main>
+      <CategoriesNav />
+      <PostList title={"Anunturi"} posts={posts} />
     </main>
-  )
+  );
 }

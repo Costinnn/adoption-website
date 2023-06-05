@@ -1,10 +1,12 @@
-import { getDbPosts } from "@/components/PostList";
+import { getDbPosts } from "@/lib/getDbPosts";
 import Post from "@/components/subcomponents/Post";
 
 import "./Wishlist.scss";
 
+// WISHLIST PAGE
 const Wishlist = async () => {
   const posts = await getDbPosts();
+
   return (
     <main className="section-narrow wishlist-page">
       <h2>Anunturi favorite</h2>

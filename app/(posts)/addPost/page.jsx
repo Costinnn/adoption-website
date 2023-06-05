@@ -1,5 +1,6 @@
 import AddForm from "@/components/AddForm";
 
+// ADD POST PAGE
 const AddPost = () => {
   return (
     <main className="section-narrow add-post">

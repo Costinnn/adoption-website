@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import RegisterForm from "@/components/RegisterForm";
 
+// REGISTER PAGE
 const Login = () => {
   return (
     <main>

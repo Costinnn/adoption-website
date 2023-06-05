@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import LoginForm from "@/components/LoginForm";
 
+//LOGIN PAGE
 const Login = () => {
   return (
     <main>
