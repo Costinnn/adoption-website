@@ -2,18 +2,11 @@
 
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+
 import "./Account.scss";
 
 // ACCOUNT PAGE
-const Account = () => {
-  const { push } = useRouter();
-  const handleSingOut = async () => {
-    const res = await signOut();
-    console.log(res);
-    // push("/");
-  };
-
+const Account = async () => {
   return (
     <main className="section-narrow account-page">
       <h1>Salut, Name!</h1>
@@ -33,7 +26,7 @@ const Account = () => {
         Schimba numele contului <span>&#8594;</span>
       </Link>
 
-      <button className="button2" onClick={handleSingOut}>
+      <button className="button2" onClick={signOut}>
         Iesi din cont
       </button>
     </main>

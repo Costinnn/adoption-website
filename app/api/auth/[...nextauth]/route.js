@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prismadb from "@/lib/prismadb";
 import { compare } from "bcrypt";
 
-const authHandler = NextAuth({
+export const authOptions = {
   providers: [
     Credentials({
       name: "Credentials",
@@ -54,9 +54,11 @@ const authHandler = NextAuth({
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   adapter: PrismaAdapter(prismadb),
-  pages:{
-    signIn:'/login'
-  }
-});
+  pages: {
+    signIn: "/login",
+  },
+};
+
+const authHandler = NextAuth(authOptions);
 
 export { authHandler as GET, authHandler as POST };

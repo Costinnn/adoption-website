@@ -1,11 +1,13 @@
 "use client";
+
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
 import "./FormStyle.scss";
 
 const LoginForm = () => {
-  const { push } = useRouter();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -23,7 +25,7 @@ const LoginForm = () => {
       if (res.error) {
         setFeedback(res.error);
       } else {
-        push("/account");
+        router.push("/account");
       }
     } catch (err) {
       console.log(err);
