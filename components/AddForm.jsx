@@ -3,10 +3,14 @@
 import axios from "axios";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 import "./FormStyle.scss";
 
 const AddForm = () => {
+  const session = useSession();
+  session.data && console.log(session.data.user, "addForm");
+
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("Catel");
@@ -97,6 +101,7 @@ const AddForm = () => {
       county,
       phone,
       email,
+      user: session.data.user.name,
     };
     await addPostToDb(postToAdd);
     setTitle("");

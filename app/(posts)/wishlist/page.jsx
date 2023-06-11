@@ -6,7 +6,7 @@ import "./Wishlist.scss";
 // WISHLIST PAGE
 const Wishlist = async () => {
   const posts = await getDbPosts();
-
+  console.log("wishlist");
   return (
     <main className="section-narrow wishlist-page">
       <h2>Anunturi favorite</h2>

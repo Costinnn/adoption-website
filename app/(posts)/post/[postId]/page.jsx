@@ -48,7 +48,7 @@ const PostPage = async ({ params }) => {
 
       <div className="account">
         <Image src={user} alt="user" width={50} height={50} />
-        <span>Mateo</span>
+        <span>{currentPost.user}</span>
       </div>
 
       <div className="row3">

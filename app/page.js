@@ -7,6 +7,7 @@ import "./page.scss";
 // HOMEPAGE
 export default async function Home() {
   const posts = await getDbPosts();
+
   return (
     <main>
       <CategoriesNav />

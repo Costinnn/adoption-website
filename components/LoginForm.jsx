@@ -21,11 +21,11 @@ const LoginForm = () => {
         redirect: false,
         callbackUrl: "/",
       });
-      console.log(res);
       if (res.error) {
         setFeedback(res.error);
       } else {
         router.push("/account");
+        router.refresh("/account");
       }
     } catch (err) {
       console.log(err);

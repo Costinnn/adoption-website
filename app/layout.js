@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { Inter } from "next/font/google";
+import AuthProvider from "@/providers/AuthProvider";
 
 import "./globals.scss";
 
@@ -11,12 +12,13 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  
   return (
     <html lang="en">
       <body className={`app ${inter.className}`}>
-        <Navbar />
-        {children}
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

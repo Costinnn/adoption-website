@@ -23,6 +23,7 @@ model Post {
   county String
   phone String
   email String
+  user String
   createdAt DateTime @default(now())
 }
 
@@ -63,7 +64,7 @@ model User {
   createdAt DateTime @default(now())
   sessions Session[]
   accounts Account[]
-  
+  favoritesId String[]
 }
 
 model VerificationToken {
