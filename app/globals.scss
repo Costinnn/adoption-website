@@ -56,11 +56,13 @@ a:active {
 
 //BUTTONS STYLE
 
-.button1 {
+.button1,
+.button3,
+.button4 {
   padding: 5px 20px;
   border-radius: 10px;
   background-color: $orange;
-  color: white;
+  color: white !important;
   font-weight: 600;
   font-size: 16px;
   border: none;
@@ -76,6 +78,14 @@ a:active {
   border: none;
   border-bottom: 1px solid $gray;
   margin-top: 50px;
+}
+
+.button3 {
+  background-color: $second-bg;
+}
+
+.button4 {
+  background-color: $gray;
 }
 
 .acc-link {
@@ -95,4 +105,22 @@ a:active {
   color: $blue !important;
   text-decoration: underline !important;
   margin-top: 30px;
+}
+
+// GLOBAL CLIENT COMPONENTS
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  .button1,
+  .button3,
+  .button4 {
+    width: 45%;
+    max-width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
 }

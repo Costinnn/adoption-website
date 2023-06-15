@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import heartActive from "@/public/icons/heart-active.png";
-import heartNoActive from "@/public/icons/heart-noactive.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+
+import heartActive from "@/public/icons/heart-active.png";
+import heartNoActive from "@/public/icons/heart-noactive.png";
 
 const WishHeart = ({ id, session, favoritesId }) => {
   const [isFavorite, setIsFavorite] = useState(false);

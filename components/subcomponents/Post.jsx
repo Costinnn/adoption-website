@@ -3,15 +3,15 @@ import Link from "next/link";
 
 import WishHeart from "../client-components/WishHeart";
 
-import male from "../../public/icons/male.png";
-import female from "../../public/icons/female.png";
-import pin from "../../public/icons/pin.png";
-import breed from "../../public/icons/breed.png";
-import category from "../../public/icons/category.png";
+import male from "@/public/icons/male.png";
+import female from "@/public/icons/female.png";
+import pin from "@/public/icons/pin.png";
+import breed from "@/public/icons/breed.png";
+import category from "@/public/icons/category.png";
 
 import "./Post.scss";
 
-const Post = ({ data, session, favoritesId }) => {
+const Post = ({ data, session, favoritesId, params }) => {
   return (
     <div className="post-item">
       <Link href={`/post/${data.id}`}>

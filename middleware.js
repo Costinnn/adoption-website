@@ -10,7 +10,9 @@ export async function middleware(request) {
     !session &&
     (request.nextUrl.pathname.startsWith("/account") ||
       request.nextUrl.pathname.startsWith("/wishlist") ||
-      request.nextUrl.pathname.startsWith("/addPost"))
+      request.nextUrl.pathname.startsWith("/addPost") ||
+      request.nextUrl.pathname.startsWith("/activePosts") ||
+      request.nextUrl.pathname.startsWith("/inactivePosts"))
   ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -25,5 +27,13 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/account", "/addPost", "/wishlist", "/login", "/register"],
+  matcher: [
+    "/account",
+    "/addPost",
+    "/activePosts",
+    "/wishlist",
+    "/login",
+    "/register",
+    "/inactivePosts",
+  ],
 };

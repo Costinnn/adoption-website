@@ -29,6 +29,10 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 10px;
+    > img {
+      width: 35px;
+      height: 35px;
+    }
   }
 
   .row2 {

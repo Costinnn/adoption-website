@@ -23,7 +23,9 @@ model Post {
   county String
   phone String
   email String
-  user String
+  userName String
+  userEmail String
+  isActive Boolean @default(true)
   createdAt DateTime @default(now())
 }
 

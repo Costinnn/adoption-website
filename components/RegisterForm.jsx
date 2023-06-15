@@ -1,6 +1,8 @@
 "use client";
+
 import { useState } from "react";
 import axios from "axios";
+
 import "./FormStyle.scss";
 
 const RegisterForm = () => {
@@ -22,7 +24,6 @@ const RegisterForm = () => {
         console.log(`${name} registered with success!`);
         setFeedback(`User ${name} created!`);
       } else {
-        console.log(res.data.error);
         setFeedback(res.data.error);
       }
     } catch (err) {

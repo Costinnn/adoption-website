@@ -1,0 +1,11 @@
+.inactivePosts-page {
+  padding: 0 20px;
+  .container {
+    .post-item {
+      margin-top: 20px;
+      > img {
+        height: 250px;
+      }
+    }
+  }
+}

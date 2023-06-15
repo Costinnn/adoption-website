@@ -9,7 +9,6 @@ import "./FormStyle.scss";
 
 const AddForm = () => {
   const session = useSession();
-  session.data && console.log(session.data.user, "addForm");
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -101,7 +100,8 @@ const AddForm = () => {
       county,
       phone,
       email,
-      user: session.data.user.name,
+      userName: session.data.user.name,
+      userEmail: session.data.user.email,
     };
     await addPostToDb(postToAdd);
     setTitle("");
@@ -117,6 +117,13 @@ const AddForm = () => {
     setEmail("");
     setImagesUrl([]);
   };
+
+  // SOMETIMES HAPPENS TO:
+  // !! when selecting multiple images be aware of the file name order and the order of the selected photos !!
+  // the preview of the images shows the selected photos order but when you delete one it is possible to be another photo due to the wrong file name order (from windows?)
+  // console.log(imagesUrl, "url");
+  // console.log(images, "imgs");
+
   return (
     <form>
       <div className="images-input">

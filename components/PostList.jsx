@@ -1,23 +1,24 @@
 import Post from "./subcomponents/Post";
-import "./PostList.scss";
-
 import { getSession } from "@/lib/getSession";
-import { getUserFavorites } from "@/lib/getUserFavorites";
+import { getFavoriteIds } from "@/lib/getFavoriteIds";
 import { headers } from "next/headers";
+
+import "./PostList.scss";
 
 const PostList = async ({ posts, title }) => {
   const session = await getSession(headers().get("cookie") ?? "");
 
-  if (session && session.status === "loading") {
-    console.log(session);
+  if (!session) {
     return (
       <div className="section-narrow posts">
-        <h2>Loading...</h2>
+        <h2>{title}</h2>
+        <div className="container">
+          {posts && posts.map((post) => <Post key={post.id} data={post} />)}
+        </div>
       </div>
     );
-  } else {
-    const user = await getUserFavorites("cxcoss@yahoo.com");
-    const favoritesId = user.favoritesId;
+  } else if (session) {
+    const {favoritesId} = await getFavoriteIds(session.user.email);
 
     return (
       <div className="section-narrow posts">

@@ -1,17 +1,27 @@
-import { getDbPosts } from "@/lib/getDbPosts";
 import Image from "next/image";
 
-import heartActive from "@/public/icons/heart-active.png";
-import heartNoActive from "@/public/icons/heart-noactive.png";
+import { headers } from "next/headers";
+import { getSession } from "@/lib/getSession";
+import { getDbPosts } from "@/lib/getDbPosts";
+import { getFavoriteIds } from "@/lib/getFavoriteIds";
+import WishHeart from "@/components/client-components/WishHeart";
+import PostActions from "@/components/client-components/PostActions";
+
+import male from "@/public/icons/male.png";
+import female from "@/public/icons/female.png";
 import map from "@/public/images/map.jpg";
-import user from "@/public/images/user.png";
+import userImg from "@/public/images/user.png";
 
 import "./PostPage.scss";
 
 // POST PAGE
 const PostPage = async ({ params }) => {
+  const session = await getSession(headers().get("cookie") ?? "");
   const posts = await getDbPosts();
   const currentPost = posts.filter((post) => post.id === params.postId)[0];
+  const { favoritesId } = session
+    ? await getFavoriteIds()
+    : { favoritesId: [] };
 
   return (
     <main className="section-narrow post-page">
@@ -32,7 +42,19 @@ const PostPage = async ({ params }) => {
 
       <div className="row1">
         <h2>{currentPost.title}</h2>
-        <Image src={heartNoActive} alt="wishlist" width={30} height={30} />
+        {session ? (
+          <WishHeart
+            id={currentPost.id}
+            session={session}
+            favoritesId={favoritesId}
+          />
+        ) : (
+          <Image
+            src={currentPost.gender === "M" ? male : female}
+            width={15}
+            alt="gender"
+          />
+        )}
       </div>
 
       <div className="row2">
@@ -47,8 +69,8 @@ const PostPage = async ({ params }) => {
       <p className="description">{currentPost.desc}</p>
 
       <div className="account">
-        <Image src={user} alt="user" width={50} height={50} />
-        <span>{currentPost.user}</span>
+        <Image src={userImg} alt="user" width={50} height={50} />
+        <span>{currentPost.userName}</span>
       </div>
 
       <div className="row3">
@@ -58,6 +80,9 @@ const PostPage = async ({ params }) => {
           {currentPost.city}, {currentPost.county}
         </span>
       </div>
+      {session && session.user.email === currentPost.userEmail && (
+        <PostActions isActive={currentPost.isActive} postId={currentPost.id} />
+      )}
     </main>
   );
 };

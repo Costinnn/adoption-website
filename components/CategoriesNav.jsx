@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import dog from "../public/images/categories/dog.png";
 import cat from "../public/images/categories/cat.png";
 import bird from "../public/images/categories/bird.png";
@@ -5,8 +8,6 @@ import rodent from "../public/images/categories/rodent.png";
 import shelter from "../public/images/categories/shelter.png";
 
 import "./CategoriesNav.scss";
-import Image from "next/image";
-import Link from "next/link";
 
 const CategoriesNav = () => {
   return (
