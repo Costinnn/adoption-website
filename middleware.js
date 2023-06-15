@@ -9,6 +9,7 @@ export async function middleware(request) {
   if (
     !session &&
     (request.nextUrl.pathname.startsWith("/account") ||
+      request.nextUrl.pathname.startsWith("/accSettings") ||
       request.nextUrl.pathname.startsWith("/wishlist") ||
       request.nextUrl.pathname.startsWith("/addPost") ||
       request.nextUrl.pathname.startsWith("/activePosts") ||
@@ -29,6 +30,7 @@ export async function middleware(request) {
 export const config = {
   matcher: [
     "/account",
+    "/accSettings/:section*",
     "/addPost",
     "/activePosts",
     "/wishlist",

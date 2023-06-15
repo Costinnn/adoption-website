@@ -48,6 +48,16 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    // function to update session when user changes it's account details
+    // triggered by update() function from useSession()
+    async jwt({ token, trigger, session }) {
+      if (trigger === "update") {
+        return { ...token, ...session.user };
+      }
+      return token;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
   jwt: {

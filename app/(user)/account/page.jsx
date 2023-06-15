@@ -28,10 +28,10 @@ const Account = async () => {
         Anunturi apreciate <span> &#8594;</span>
       </Link>
       <h2>Cont</h2>
-      <Link href="/" className="acc-link">
+      <Link href="/accSettings/password" className="acc-link">
         Schimba parola <span>&#8594;</span>
       </Link>
-      <Link href="/" className="acc-link">
+      <Link href="/accSettings/name" className="acc-link">
         Schimba numele contului <span>&#8594;</span>
       </Link>
       <SignoutBtn />
