@@ -14,7 +14,7 @@ const WishHeart = ({ id, session, favoritesId }) => {
     try {
       if (!isFavorite) {
         const res = await axios.post(
-          `http://localhost:3000/api/addToWishlist`,
+          `${process.env.NEXT_PUBLIC_URL}/api/addToWishlist`,
           {
             postId,
             userEmail,
@@ -26,7 +26,7 @@ const WishHeart = ({ id, session, favoritesId }) => {
         }
       } else {
         const res = await axios.post(
-          `http://localhost:3000/api/deleteFromWishlist`,
+          `${process.env.NEXT_PUBLIC_URL}/api/deleteFromWishlist`,
           {
             postId,
             userEmail,

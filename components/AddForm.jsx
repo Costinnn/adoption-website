@@ -79,7 +79,7 @@ const AddForm = () => {
   // ADD TO DB FUNCTION
   const addPostToDb = async (postToAdd) => {
     try {
-      await axios.post("http://localhost:3000/api/addpost", postToAdd);
+      await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/addpost`, postToAdd);
     } catch (err) {
       console.log(err);
     }

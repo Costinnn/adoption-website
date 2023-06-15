@@ -33,25 +33,36 @@ const AccountSettings = ({ params }) => {
       fieldToUpdate: params.section,
       inputData,
     };
+    if (params.section === "password") {
+      if (inputData !== secondPw) {
+        setFeedback("Parolele nu corespund!");
+        return;
+      }
+    }
     try {
       const res = await axios.patch(
-        "http://localhost:3000/api/accSettings",
+        `${process.env.NEXT_PUBLIC_URL}/api/accSettings`,
         updateFields
       );
 
-      if (res.data.id && params.section === "name") {
-        //update name in session
-        await update({
-          ...session,
-          user: { ...session.user, name: inputData },
-        });
+      if (res.data.id) {
+        if (params.section === "name") {
+          //update name in session
+          await update({
+            ...session,
+            user: { ...session.user, name: inputData },
+          });
+          setFeedback("");
+
+          console.log("Name updated with success!");
+        }
         router.push("/account");
         router.refresh("/account");
-        console.log("Name updated with success!");
       } else if (res.error) {
         setFeedback(res.error);
       }
       setInputData("");
+      setSecondPw("");
     } catch (err) {
       console.log(err);
     }
@@ -72,17 +83,19 @@ const AccountSettings = ({ params }) => {
           name={fields.id}
           value={inputData}
           onChange={(e) => setInputData(e.target.value)}
+          required
         />
         {params.section === "password" && (
           <>
             <br />
-            <label htmlFor={fields.id}>{fields.label2}</label>
+            <label htmlFor="secondPw">{fields.label2}</label>
             <input
-              type={fields.type}
-              id={fields.id}
-              name={fields.id}
+              type="password"
+              id="secondPw"
+              name="secondPw"
               value={secondPw}
               onChange={(e) => setSecondPw(e.target.value)}
+              required
             />
           </>
         )}

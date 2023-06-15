@@ -13,7 +13,7 @@ const PostActions = ({ isActive, postId }) => {
   const toggleActivePost = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/toggleActivePost",
+        `${process.env.NEXT_PUBLIC_URL}/api/toggleActivePost`,
         {
           isActive: !isActiveStatus,
           postId,
