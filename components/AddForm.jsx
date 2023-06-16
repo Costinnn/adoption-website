@@ -22,12 +22,15 @@ const AddForm = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [imagesUrl, setImagesUrl] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
   // COMPONENT FUNCTIONS
 
   const convertToBase64 = async (fileArr) => {
     for await (let file of fileArr) {
       const reader = new FileReader();
+      console.log("converting");
       try {
         reader.readAsDataURL(file);
         reader.onload = () => {
@@ -45,7 +48,7 @@ const AddForm = () => {
     setImagesUrl((prev) => [...prev, ...imagesUrl]);
   };
 
-  const uploadImages = (e) => {
+  const uploadImages = async (e) => {
     const selectedImg = [...e.target.files];
 
     if (images.length >= 5) {
@@ -53,11 +56,11 @@ const AddForm = () => {
     } else if (images.length + selectedImg.length > 5) {
       const numberFilesToAdd = 5 - images.length;
       const newSelectedImg = selectedImg.slice(0, numberFilesToAdd);
+      await convertToBase64(newSelectedImg);
       createImgUrl(newSelectedImg);
-      convertToBase64(newSelectedImg);
     } else {
+      await convertToBase64(selectedImg);
       createImgUrl(selectedImg);
-      convertToBase64(selectedImg);
     }
   };
 
@@ -79,14 +82,20 @@ const AddForm = () => {
   // ADD TO DB FUNCTION
   const addPostToDb = async (postToAdd) => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/addpost`, postToAdd);
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/api/addpost`,
+        postToAdd
+      );
+      return res;
     } catch (err) {
       console.log(err);
+      return err;
     }
   };
 
   // HANDLE SUBMIT
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const postToAdd = {
       title,
@@ -103,19 +112,29 @@ const AddForm = () => {
       userName: session.data.user.name,
       userEmail: session.data.user.email,
     };
-    await addPostToDb(postToAdd);
-    setTitle("");
-    setDesc("");
-    setCategory("Catel");
-    setImages([]);
-    setAge("<1");
-    setGender("M");
-    setBreed("");
-    setCity("");
-    setCounty("");
-    setPhone("");
-    setEmail("");
-    setImagesUrl([]);
+    const res = await addPostToDb(postToAdd);
+
+    if (res.data.id) {
+      setFeedback("Anunt adaugat cu succes!");
+      setTitle("");
+      setDesc("");
+      setCategory("Catel");
+      setImages([]);
+      setAge("<1");
+      setGender("M");
+      setBreed("");
+      setCity("");
+      setCounty("");
+      setPhone("");
+      setEmail("");
+      setImagesUrl([]);
+    } else if (!res.data.id) {
+      setFeedback(
+        "Nu am putut adauga anuntul tau! Pozele au mai mult de 10MB!"
+      );
+    }
+    setLoading(false);
+    setTimeout(() => setFeedback(""), 10000);
   };
 
   // SOMETIMES HAPPENS TO:
@@ -123,7 +142,6 @@ const AddForm = () => {
   // the preview of the images shows the selected photos order but when you delete one it is possible to be another photo due to the wrong file name order (from windows?)
   // console.log(imagesUrl, "url");
   // console.log(images, "imgs");
-
   return (
     <form>
       <div className="images-input">
@@ -269,8 +287,9 @@ const AddForm = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      {feedback && <span>{feedback}</span>}
       <button onClick={handleSubmit} className="button1">
-        ADAUGA
+        {loading ? "Adaugam anuntul tau..." : " ADAUGA"}
       </button>
     </form>
   );

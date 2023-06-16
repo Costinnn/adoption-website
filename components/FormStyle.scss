@@ -57,6 +57,19 @@ form {
       display: block;
       max-width: 100%;
       text-align: center;
+      > .loader {
+        margin-left: 10px;
+        animation: loading 2s infinite ease-in-out;
+      }
+
+      @keyframes loading {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
     }
     #images {
       visibility: hidden;
@@ -89,5 +102,12 @@ form {
         }
       }
     }
+  }
+  .button1 {
+    margin-top: 30px;
+  }
+  > span {
+    margin-top: 30px;
+    text-align: center;
   }
 }
