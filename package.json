@@ -22,7 +22,7 @@
     "sass": "^1.62.1"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.29.5-appdir.0",
+    "@netlify/plugin-nextjs": "^4.37.4-appdir.0",
     "prisma": "^4.14.1"
   }
 }
