@@ -4,10 +4,10 @@ import Link from "next/link";
 import { getSession } from "@/lib/getSession";
 import { headers } from "next/dist/client/components/headers";
 
-import logo from "../public/images/logo.png";
-import add from "../public/icons/add.png";
-import heart from "../public/icons/heart.png";
-import userImg from "../public/icons/user.png";
+import logo from "@/public/images/logo.png";
+import add from "@/public/icons/add.png";
+import heart from "@/public/icons/heart.png";
+import userImg from "@/public/icons/user.png";
 
 import "./Navbar.scss";
 

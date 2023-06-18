@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 $main-bg: #0e60ff;
 $main-bg2: #9e3bff;
 $second-bg: #8fa5ff;
@@ -21,6 +23,7 @@ main {
 .app {
   width: calc(100vw - (100vw - 100%));
   overflow-x: hidden;
+  font-family: "Roboto", sans-serif;
 }
 
 // GENERAL STYLES
@@ -58,7 +61,8 @@ a:active {
 
 .button1,
 .button3,
-.button4 {
+.button4,
+.button5 {
   padding: 5px 20px;
   border-radius: 10px;
   background-color: $orange;
@@ -85,6 +89,10 @@ a:active {
 
 .button4 {
   background-color: $gray;
+}
+
+.button5 {
+  background-color: red;
 }
 
 .acc-link {

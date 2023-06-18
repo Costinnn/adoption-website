@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { headers } from "next/headers";
 import { getSession } from "@/lib/getSession";
-import { getDbPosts } from "@/lib/getDbPosts";
+import { getPost } from "@/lib/getPost";
 import { getFavoriteIds } from "@/lib/getFavoriteIds";
 import WishHeart from "@/components/client-components/WishHeart";
 import PostActions from "@/components/client-components/PostActions";
@@ -17,8 +17,8 @@ import "./PostPage.scss";
 // POST PAGE
 const PostPage = async ({ params }) => {
   const session = await getSession(headers().get("cookie") ?? "");
-  const posts = await getDbPosts();
-  const currentPost = posts.filter((post) => post.id === params.postId)[0];
+  const currentPost = await getPost(params.postId);
+
   const { favoritesId } = session
     ? await getFavoriteIds()
     : { favoritesId: [] };

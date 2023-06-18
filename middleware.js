@@ -12,6 +12,7 @@ export async function middleware(request) {
       request.nextUrl.pathname.startsWith("/accSettings") ||
       request.nextUrl.pathname.startsWith("/wishlist") ||
       request.nextUrl.pathname.startsWith("/addPost") ||
+      request.nextUrl.pathname.startsWith("/modifyPost") ||
       request.nextUrl.pathname.startsWith("/activePosts") ||
       request.nextUrl.pathname.startsWith("/inactivePosts"))
   ) {
@@ -32,6 +33,7 @@ export const config = {
     "/account",
     "/accSettings/:section*",
     "/addPost",
+    "/modifyPost/:postId*",
     "/activePosts",
     "/wishlist",
     "/login",

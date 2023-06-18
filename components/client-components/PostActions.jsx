@@ -8,11 +8,10 @@ import axios from "axios";
 const PostActions = ({ isActive, postId }) => {
   const router = useRouter();
   const [isActiveStatus, setIsActiveStatus] = useState(isActive);
-  console.log("Active: ", isActiveStatus);
 
   const toggleActivePost = async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.patch(
         `${process.env.NEXT_PUBLIC_URL}/api/toggleActivePost`,
         {
           isActive: !isActiveStatus,
@@ -22,6 +21,23 @@ const PostActions = ({ isActive, postId }) => {
       if (res.data.id) {
         setIsActiveStatus((prev) => !prev);
         router.refresh(`/post/${postId}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deletePost = async () => {
+    try {
+      // delete "post" with "delete" when NextJs 13.4 bug is fixed ro request body
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/api/deletePost`,
+        { postId }
+      );
+
+      if (res.data.id) {
+        router.push(`/account`);
+        console.log("Post deleted!");
       }
     } catch (err) {
       console.log(err);
@@ -40,9 +56,13 @@ const PostActions = ({ isActive, postId }) => {
         </button>
       )}
 
-      <Link href="/" className="button3">
+      <Link href={`/modifyPost/${postId}`} className="button3">
         Modifica
       </Link>
+
+      <button className="button5" onClick={deletePost}>
+        Sterge
+      </button>
     </div>
   );
 };

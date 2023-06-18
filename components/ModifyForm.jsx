@@ -6,23 +6,21 @@ import { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Resizer from "react-image-file-resizer";
 
-import "./FormStyle.scss";
+import "@/components/FormStyle.scss";
 
-const AddForm = () => {
-  const session = useSession();
-
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [category, setCategory] = useState("Catel");
-  const [images, setImages] = useState([]);
-  const [age, setAge] = useState("<1");
-  const [gender, setGender] = useState("M");
-  const [breed, setBreed] = useState("");
-  const [city, setCity] = useState("");
-  const [county, setCounty] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [imagesUrl, setImagesUrl] = useState([]);
+const ModifyForm = ({ currentPost }) => {
+  const [title, setTitle] = useState(currentPost.title);
+  const [desc, setDesc] = useState(currentPost.desc);
+  const [category, setCategory] = useState(currentPost.category);
+  const [images, setImages] = useState(currentPost.images);
+  const [age, setAge] = useState(currentPost.age);
+  const [gender, setGender] = useState(currentPost.gender);
+  const [breed, setBreed] = useState(currentPost.breed);
+  const [city, setCity] = useState(currentPost.city);
+  const [county, setCounty] = useState(currentPost.county);
+  const [phone, setPhone] = useState(currentPost.phone);
+  const [email, setEmail] = useState(currentPost.email);
+  const [imagesUrl, setImagesUrl] = useState(currentPost.images);
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
 
@@ -108,12 +106,13 @@ const AddForm = () => {
   };
 
   // ADD TO DB FUNCTION
-  const addPostToDb = async (postToAdd) => {
+  const modifyDbPost = async (postModified) => {
     try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}/api/addpost`,
-        postToAdd
+      const res = await axios.patch(
+        `${process.env.NEXT_PUBLIC_URL}/api/modifyPost`,
+        postModified
       );
+      console.log(res);
       return res;
     } catch (err) {
       console.log(err);
@@ -125,7 +124,7 @@ const AddForm = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const postToAdd = {
+    const postModified = {
       title,
       desc,
       category,
@@ -137,28 +136,15 @@ const AddForm = () => {
       county,
       phone,
       email,
-      userName: session.data.user.name,
-      userEmail: session.data.user.email,
+      postId: currentPost.id,
     };
-    const res = await addPostToDb(postToAdd);
+    const res = await modifyDbPost(postModified);
 
     if (res.data.id) {
-      setFeedback("Anunt adaugat cu succes!");
-      setTitle("");
-      setDesc("");
-      setCategory("Catel");
-      setImages([]);
-      setAge("<1");
-      setGender("M");
-      setBreed("");
-      setCity("");
-      setCounty("");
-      setPhone("");
-      setEmail("");
-      setImagesUrl([]);
+      setFeedback("Anunt modificat cu succes!");
     } else if (!res.data.id) {
       setFeedback(
-        "Nu am putut adauga anuntul tau! Pozele au mai mult de 10MB!"
+        "Nu am putut modifica anuntul tau! Pozele au mai mult de 10MB!"
       );
     }
     setLoading(false);
@@ -170,6 +156,7 @@ const AddForm = () => {
   // the preview of the images shows the selected photos order but when you delete one it is possible to be another photo due to the wrong file name order (from windows?)
   // console.log(imagesUrl, "url");
   // console.log(images, "imgs");
+
   return (
     <form>
       <div className="images-input">
@@ -317,10 +304,10 @@ const AddForm = () => {
       />
       {feedback && <span>{feedback}</span>}
       <button onClick={handleSubmit} className="button1">
-        {loading ? "Adaugam anuntul tau..." : " ADAUGA"}
+        {loading ? "Modificam anuntul tau..." : " MODIFICA"}
       </button>
     </form>
   );
 };
 
-export default AddForm;
+export default ModifyForm;

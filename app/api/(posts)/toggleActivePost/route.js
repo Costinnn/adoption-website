@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function PATCH(request) {
   try {
     const reqData = await request.json();
     const updateActiveStatus = await prismadb.post.update({

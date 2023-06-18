@@ -1,13 +1,11 @@
-import { getDbPosts } from "@/lib/getDbPosts";
+import { getCategory } from "@/lib/getCategory";
 import PostList from "@/components/PostList";
 import CategoriesNav from "@/components/CategoriesNav";
 
 // CATEGORIES PAGE
 const Categories = async ({ params }) => {
-  const posts = await getDbPosts();
-  const currentPosts = posts.filter(
-    (item) => item.category === params.category
-  );
+  const currentPosts = await getCategory(params.category);
+
   return (
     <main className="section-narrow">
       <CategoriesNav />
