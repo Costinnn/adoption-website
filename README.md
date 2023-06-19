@@ -1,7 +1,7 @@
 # Animal adoption website
 This is a React website, build using [Next.js v13.4.4](https://nextjs.org/) , [Prisma](https://www.prisma.io/) and [Mongo DB](https://www.mongodb.com/)
 ## Introduction - project's aim
-After creating an online store using the MERN stack, I was curious about the benefits of the Next.js framework and what you could do with it, uniting both client-side and server-side rendering pages. Although at the beginning it was a little difficult to think and structure the application according to the requirements of the Next.js framework, after a few days of practice you can already see the indisputable advantages that these technologies offer developers to create high-performance and efficient applications.
+After creating an online store using the MERN stack, I was curious about the benefits of the Next.js framework and what you could do with it, uniting both client-side and server-side rendering pages. Although at the beginning it was a little difficult to think and structure the application according to the requirements of the Next.js framework, after a few days of practice you can already see the indisputable advantages that these technologies offer developers the ability to create high-performance and efficient applications.
 
 The purpose of this application is to give every animal a second chance, so those interested in adopting an animal can search for their favorite, and those who want to offer a pet for adoption can create an account, add an ad with pictures, description and other information about the animal.
 
