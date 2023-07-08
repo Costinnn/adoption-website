@@ -1,5 +1,10 @@
 .activePosts-page {
   padding: 0 20px;
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   .container {
     .post-item {
       margin-top: 20px;

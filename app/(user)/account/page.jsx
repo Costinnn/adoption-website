@@ -28,6 +28,9 @@ const Account = async () => {
         Anunturi apreciate <span> &#8594;</span>
       </Link>
       <h2>Cont</h2>
+      <Link href="/conversation/1" className="acc-link">
+        Mesaje <span>&#8594;</span>
+      </Link>
       <Link href="/accSettings/password" className="acc-link">
         Schimba parola <span>&#8594;</span>
       </Link>

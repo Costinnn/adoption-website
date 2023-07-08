@@ -5,6 +5,7 @@ import { getFavoriteIds } from "@/lib/getFavoriteIds";
 import Post from "@/components/subcomponents/Post";
 
 import "./Wishlist.scss";
+import GoBack from "@/utils/GoBack";
 
 // WISHLIST PAGE
 const Wishlist = async () => {
@@ -17,12 +18,15 @@ const Wishlist = async () => {
       </div>
     );
   } else {
-    const {favoritesId} = await getFavoriteIds(session.user.email);
+    const { favoritesId } = await getFavoriteIds(session.user.email);
     const posts = await getFavoritesPosts(favoritesId);
 
     return (
       <main className="section-narrow wishlist-page">
-        <h2>Anunturi favorite</h2>
+        <div className="header">
+          <GoBack width="25" height="25" customClass="go-back" />
+          <h2>Anunturi favorite</h2>
+        </div>
         <div className="container">
           {posts &&
             posts.map((post) => (

@@ -2,13 +2,14 @@
 
 import axios from "axios";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Resizer from "react-image-file-resizer";
 
 import "@/components/FormStyle.scss";
 
 const ModifyForm = ({ currentPost }) => {
+  const router = useRouter();
   const [title, setTitle] = useState(currentPost.title);
   const [desc, setDesc] = useState(currentPost.desc);
   const [category, setCategory] = useState(currentPost.category);
@@ -142,6 +143,10 @@ const ModifyForm = ({ currentPost }) => {
 
     if (res.data.id) {
       setFeedback("Anunt modificat cu succes!");
+      setTimeout(() => {
+        router.refresh(`/post/${res.data.id}`);
+        router.push(`/post/${res.data.id}`);
+      }, 2000);
     } else if (!res.data.id) {
       setFeedback(
         "Nu am putut modifica anuntul tau! Pozele au mai mult de 10MB!"

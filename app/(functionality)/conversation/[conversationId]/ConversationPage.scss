@@ -1,0 +1,72 @@
+@use "@/app/globals.scss";
+
+.conversation-page {
+  margin-top: 80px !important;
+  .conversation-header {
+    background-color: globals.$second-bg2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    padding: 5px 10px;
+    .go-back {
+      margin-right: 10px;
+    }
+    .post-img {
+      object-fit: cover;
+    }
+  }
+  .conversation-box {
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+
+    .send,
+    .received {
+      padding: 5px 10px;
+      max-width: 70%;
+      border-radius: 10px;
+      color: white;
+    }
+
+    .send {
+      align-self: flex-end;
+      background-color: globals.$blue;
+    }
+    .received {
+      align-self: flex-start;
+      background-color: globals.$second-bg;
+    }
+  }
+
+  .conversation-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin-top: 5px;
+
+    input {
+      width: calc(100% - 45px);
+      max-width: 400px;
+      padding: 5px 10px;
+      outline: none;
+      border-radius: 10px;
+      border: 1px solid globals.$second-bg;
+    }
+    button {
+      background-color: globals.$blue;
+      padding: 5px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

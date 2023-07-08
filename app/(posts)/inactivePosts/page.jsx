@@ -2,6 +2,7 @@ import { getUserPosts } from "@/lib/getUserPosts";
 import Post from "@/components/subcomponents/Post";
 
 import "./InactivePosts.scss";
+import GoBack from "@/utils/GoBack";
 
 const ActivePosts = async () => {
   const allUserPosts = await getUserPosts();
@@ -9,7 +10,11 @@ const ActivePosts = async () => {
 
   return (
     <main className="section-narrow inactivePosts-page">
-      <h2>Anunturi inactive</h2>
+      <div className="header">
+        <GoBack width="25" height="25" customClass="go-back" />
+        <h2>Anunturi inactive</h2>
+      </div>
+
       <div className="container">
         {inactivePosts &&
           inactivePosts.map((post) => (

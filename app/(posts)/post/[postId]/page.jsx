@@ -6,13 +6,17 @@ import { getPost } from "@/lib/getPost";
 import { getFavoriteIds } from "@/lib/getFavoriteIds";
 import WishHeart from "@/components/client-components/WishHeart";
 import PostActions from "@/components/client-components/PostActions";
+import GoBack from "@/utils/GoBack";
 
 import male from "@/public/icons/male.png";
 import female from "@/public/icons/female.png";
 import map from "@/public/images/map.jpg";
 import userImg from "@/public/images/user.png";
+import phoneImg from "@/public/icons/phone.png";
+import messageImg from "@/public/icons/message.png";
 
 import "./PostPage.scss";
+import Link from "next/link";
 
 // POST PAGE
 const PostPage = async ({ params }) => {
@@ -25,6 +29,7 @@ const PostPage = async ({ params }) => {
 
   return (
     <main className="section-narrow post-page">
+      <GoBack width="50" height="50" customClass="go-back" />
       <div className="frame">
         <div className="images-container">
           {currentPost.images.map((item) => (
@@ -69,8 +74,26 @@ const PostPage = async ({ params }) => {
       <p className="description">{currentPost.desc}</p>
 
       <div className="account">
-        <Image src={userImg} alt="user" width={50} height={50} />
-        <span>{currentPost.userName}</span>
+        <div className="name">
+          <Image src={userImg} alt="user" width={35} height={35} />
+          <span>{currentPost.userName}</span>
+        </div>
+        {session && session.user.email !== currentPost.userEmail && (
+          <div className="contact">
+            <Link href="/conversation/1">
+              Mesaj
+              <Image src={messageImg} alt="message" width={15} height={15} />
+            </Link>
+            <a href={`tel:${currentPost.phone}`}>
+              <Image src={phoneImg} alt="call" width={15} height={15} /> Suna
+            </a>
+          </div>
+        )}
+        {!session && (
+          <Link href="/login" className="login-redirect">
+            Intra in contul tau pentru a contacta aceasta persoana.
+          </Link>
+        )}
       </div>
 
       <div className="row3">

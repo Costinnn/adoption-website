@@ -2,6 +2,13 @@
 
 .post-page {
   padding: 0 10px;
+  position: relative;
+  .go-back {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    padding: 10px;
+  }
   .frame {
     width: 100%;
     overflow-x: scroll;
@@ -53,12 +60,45 @@
 
   .account {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+
     padding: 10px;
     margin-top: 30px;
+    font-size: 14px;
     background-color: globals.$third-bg2;
+    .name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .login-redirect {
+      text-align: center;
+      max-width: 300px;
+    }
+    .contact {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+
+      a {
+        min-width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border: 1px solid globals.$second-bg;
+        padding: 5px;
+        border-radius: 10px;
+        font-weight: 500;
+        color: globals.$second-bg;
+
+        img {
+          color: globals.$second-bg;
+        }
+      }
+    }
   }
 
   .row3 {
