@@ -4,16 +4,17 @@ import { headers } from "next/headers";
 import { getSession } from "@/lib/getSession";
 import { getPost } from "@/lib/getPost";
 import { getFavoriteIds } from "@/lib/getFavoriteIds";
+import { getUserIdByEmail } from "@/lib/getUserIdByEmail";
 import WishHeart from "@/components/client-components/WishHeart";
 import PostActions from "@/components/client-components/PostActions";
 import GoBack from "@/utils/GoBack";
+import SendMessageRedirect from "@/utils/SendMessageRedirect";
 
 import male from "@/public/icons/male.png";
 import female from "@/public/icons/female.png";
 import map from "@/public/images/map.jpg";
 import userImg from "@/public/images/user.png";
 import phoneImg from "@/public/icons/phone.png";
-import messageImg from "@/public/icons/message.png";
 
 import "./PostPage.scss";
 import Link from "next/link";
@@ -22,6 +23,8 @@ import Link from "next/link";
 const PostPage = async ({ params }) => {
   const session = await getSession(headers().get("cookie") ?? "");
   const currentPost = await getPost(params.postId);
+  const otherUserId = await getUserIdByEmail(currentPost.userEmail);
+  const currentUserId = await getUserIdByEmail(session.user.email);
 
   const { favoritesId } = session
     ? await getFavoriteIds()
@@ -80,10 +83,12 @@ const PostPage = async ({ params }) => {
         </div>
         {session && session.user.email !== currentPost.userEmail && (
           <div className="contact">
-            <Link href="/conversation/1">
-              Mesaj
-              <Image src={messageImg} alt="message" width={15} height={15} />
-            </Link>
+            {/*look for existing conversation and link to /conversation/id, 
+            if none link to /conversation */}
+            <SendMessageRedirect
+              otherUserId={otherUserId}
+              currentUserId={currentUserId}
+            />
             <a href={`tel:${currentPost.phone}`}>
               <Image src={phoneImg} alt="call" width={15} height={15} /> Suna
             </a>

@@ -1,18 +1,15 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 import { useEffect, useRef } from "react";
 
 import GoBack from "@/utils/GoBack";
 import test from "@/public/cat1.jpg";
 import sendImg from "@/public/icons/send.png";
-import leftImg from "@/public/icons/left.png";
 import "./ConversationPage.scss";
 
 const ConversationPage = ({ params }) => {
   const bottonRef = useRef(null);
-  const router = useRouter();
 
   useEffect(() => {
     bottonRef.current.scrollIntoView();

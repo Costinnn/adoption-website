@@ -82,7 +82,8 @@
       display: flex;
       justify-content: space-around;
 
-      a {
+      a,
+      span {
         min-width: 80px;
         display: flex;
         align-items: center;
