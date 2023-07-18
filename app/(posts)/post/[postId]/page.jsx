@@ -83,11 +83,10 @@ const PostPage = async ({ params }) => {
         </div>
         {session && session.user.email !== currentPost.userEmail && (
           <div className="contact">
-            {/*look for existing conversation and link to /conversation/id, 
-            if none link to /conversation */}
             <SendMessageRedirect
               otherUserId={otherUserId}
               currentUserId={currentUserId}
+              postId={params.postId}
             />
             <a href={`tel:${currentPost.phone}`}>
               <Image src={phoneImg} alt="call" width={15} height={15} /> Suna

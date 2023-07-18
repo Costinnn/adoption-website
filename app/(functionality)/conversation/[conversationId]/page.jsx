@@ -1,35 +1,33 @@
-"use client";
 import Image from "next/image";
 
-import { useEffect, useRef } from "react";
-
+import { getPost } from "@/lib/getPost";
+import { getConversation } from "@/lib/getConversation";
 import GoBack from "@/utils/GoBack";
-import test from "@/public/cat1.jpg";
-import sendImg from "@/public/icons/send.png";
+import ConversationInput from "@/components/ConversationInput";
+import BottomScroll from "@/components/client-components/BottomScroll";
+
 import "./ConversationPage.scss";
 
-const ConversationPage = ({ params }) => {
-  const bottonRef = useRef(null);
-
-  useEffect(() => {
-    bottonRef.current.scrollIntoView();
-  }, []);
-
+const ConversationPage = async ({ params }) => {
+  const currentConversation = await getConversation(params.conversationId);
+  const currentPost = await getPost(currentConversation.postId);
+  // console.log(currentConversation, currentPost);
+  console.log("ConversationPage");
   return (
     <main className="section-narrow conversation-page">
       <div className="conversation-header">
         <GoBack width="20" height="20" customClass="go-back" />
         <Image
           className="post-img"
-          src={test}
+          src={currentPost.images[0]}
           alt="send"
           width={40}
           height={40}
         />
         <div>
-          <span>userX</span>
+          <span>{currentPost.userName}</span>
           <br />
-          <span>Anunt XAX</span>
+          <span>{currentPost.title}</span>
         </div>
       </div>
       <div className="conversation-box">
@@ -68,20 +66,9 @@ const ConversationPage = ({ params }) => {
           aliquam asperiores hic doloribus aspernatur ab adipisci amet molestias
           ducimus?
         </span>
-        <div ref={bottonRef}></div>
+        <BottomScroll />
       </div>
-      <form className="conversation-input">
-        <input type="text" />
-        <button>
-          <Image
-            className="send"
-            src={sendImg}
-            alt="send"
-            width={17}
-            height={17}
-          />
-        </button>
-      </form>
+      <ConversationInput />
     </main>
   );
 };

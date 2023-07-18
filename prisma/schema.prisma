@@ -27,6 +27,7 @@ model Post {
   userEmail String
   isActive Boolean @default(true)
   createdAt DateTime @default(now())
+  conversations Conversation[]
 }
 
 model Account {
@@ -81,6 +82,9 @@ model Conversation {
   name String?
 
   messages Message[]
+
+  postId String @db.ObjectId
+  post Post @relation(fields: [postId], references: [id])
 
   userIds String[] @db.ObjectId
   users User[] @relation(fields: [userIds], references: [id])

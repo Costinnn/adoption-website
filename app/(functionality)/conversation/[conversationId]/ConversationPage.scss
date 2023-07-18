@@ -26,6 +26,7 @@
     flex-direction: column;
     gap: 5px;
     padding: 10px;
+    margin-bottom: 60px;
 
     .send,
     .received {
@@ -42,39 +43,6 @@
     .received {
       align-self: flex-start;
       background-color: globals.$second-bg;
-    }
-  }
-
-  .conversation-input {
-    position: fixed;
-    width: 100%;
-    height: 60px;
-    bottom: 0px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    margin-top: 5px;
-
-    input {
-      width: calc(100% - 45px);
-      max-width: 400px;
-      padding: 5px 10px;
-      outline: none;
-      border-radius: 10px;
-      border: 1px solid globals.$second-bg;
-    }
-    button {
-      background-color: globals.$blue;
-      padding: 5px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
   }
 }

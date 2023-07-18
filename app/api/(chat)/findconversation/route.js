@@ -23,33 +23,16 @@ export async function POST(req) {
         postId: { equals: postId },
       },
     });
+
     const conversationExists = verifyExistingConversation[0];
-    // create new conversation if one does not exist
+
     if (conversationExists) {
       return NextResponse.json(conversationExists);
     }
-    const newConversation = await prismadb.conversation.create({
-      data: {
-        users: {
-          connect: [
-            {
-              id: currentUserId,
-            },
-            {
-              id: otherUserId,
-            },
-          ],
-        },
-        post: { connect: { id: postId } },
-      },
-      include: {
-        users: true,
-        post: true,
-      },
-    });
-    return NextResponse.json(newConversation);
+
+    return NextResponse.json("Not_found", { status: 200 });
   } catch (err) {
     console.log(err);
-    return NextResponse.json("CONVERSATION_ERROR", { status: 500 });
+    return NextResponse.json("FIND_CONVERSATION_ERROR", { status: 500 });
   }
 }
