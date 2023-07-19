@@ -70,7 +70,7 @@ const AccountSettings = ({ params }) => {
 
   useEffect(() => {
     setFields(sectionData[params.section]);
-  }, []);
+  }, [params.section]);
 
   return (
     <main>

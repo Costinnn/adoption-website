@@ -5,7 +5,7 @@ import GoBack from "@/utils/GoBack";
 import { getPost } from "@/lib/getPost";
 import { getUserIdByEmail } from "@/lib/getUserIdByEmail";
 import { getSession } from "@/lib/getSession";
-import ConversationInput from "@/components/ConversationInput";
+import BlankConversationInput from "@/components/BlankConversationInput";
 
 import "../../conversation/[conversationId]/ConversationPage.scss";
 
@@ -34,7 +34,7 @@ const BlankConversation = async ({ params }) => {
         </div>
       </div>
       <div className="conversation-box"></div>
-      <ConversationInput
+      <BlankConversationInput
         otherUserId={otherUserId}
         currentUserId={currentUserId}
         postId={params.postId}

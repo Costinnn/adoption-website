@@ -1,45 +1,50 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import sendImg from "@/public/icons/send.png";
 
 import "./ConversationInput.scss";
-import { useState } from "react";
 
-const ConversationInput = ({ otherUserId, currentUserId, postId }) => {
-  const router = useRouter();
-  const [firstMessage, setFirstMessage] = useState("");
+const ConversationInput = ({ conversationId }) => {
+  const [isSent, setIsSent] = useState(false);
+  const [message, setMessage] = useState("");
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!message) return;
+
     try {
-      // create new conversation
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}/api/conversation`,
-        { otherUserId, currentUserId, postId }
-      );
-      console.log(res);
-      router.push(`/conversation/${res.data.id}`);
+      const res = await axios.post("/api/message", {
+        message,
+        conversationId,
+      });
+      if (res.data.id) {
+        setMessage("");
+        setIsSent(true);
+        setTimeout(() => {
+          setIsSent(false);
+        }, 1000);
+      }
     } catch (err) {
       console.log(err);
       return err;
     }
-
-    // create message
   };
 
   return (
     <form className="conversation-input" onSubmit={(e) => handleSubmit(e)}>
       <input
         type="text"
-        value={firstMessage}
-        onChange={(e) => setFirstMessage(e.target.value)}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        style={{ borderColor: isSent && "green" }}
       />
-      <button>
+      <button style={{ backgroundColor: isSent && "green" }}>
         <Image
           className="send"
           src={sendImg}

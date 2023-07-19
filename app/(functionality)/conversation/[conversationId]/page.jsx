@@ -2,15 +2,20 @@ import Image from "next/image";
 
 import { getPost } from "@/lib/getPost";
 import { getConversation } from "@/lib/getConversation";
+import { getCurrentUserId } from "@/lib/getCurrentUserId";
 import GoBack from "@/utils/GoBack";
-import ConversationInput from "@/components/ConversationInput";
 import BottomScroll from "@/components/client-components/BottomScroll";
+import ConversationInput from "@/components/ConversationInput";
 
 import "./ConversationPage.scss";
+import getMessages from "@/lib/getMessages";
 
 const ConversationPage = async ({ params }) => {
   const currentConversation = await getConversation(params.conversationId);
   const currentPost = await getPost(currentConversation.postId);
+  const messages = await getMessages(params.conversationId);
+  const currentUserId = await getCurrentUserId();
+
   // console.log(currentConversation, currentPost);
   console.log("ConversationPage");
   return (
@@ -31,44 +36,18 @@ const ConversationPage = async ({ params }) => {
         </div>
       </div>
       <div className="conversation-box">
-        <span className="send">Hello how are you?</span>
-        <span className="received">Good, thank you!</span>
-        <span className="send">
-          Hello how are you?Good, thank you!Good, thank you!Good, thank
-          you!Good, thank you!Good, thank you!
-        </span>
-        <span className="received">
-          Good, thank you!Good, thank you!Good, thank you!Good, thank you!Good,
-          thank you!
-        </span>
-        <span className="received">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti sed
-          aliquam asperiores hic doloribus aspernatur ab adipisci amet molestias
-          ducimus?
-        </span>
-        <span className="send">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti sed
-          aliquam asperiores hic doloribus aspernatur ab adipisci amet molestias
-          ducimus?
-        </span>
-        <span className="received">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti sed
-          aliquam asperiores hic doloribus aspernatur ab adipisci amet molestias
-          ducimus?
-        </span>
-        <span className="send">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti sed
-          aliquam asperiores hic doloribus aspernatur ab adipisci amet molestias
-          ducimus?
-        </span>
-        <span className="received">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti sed
-          aliquam asperiores hic doloribus aspernatur ab adipisci amet molestias
-          ducimus?
-        </span>
+        {messages.map((message) => (
+          <span
+            className={message.senderId === currentUserId ? "send" : "received"}
+            key={message.id}
+          >
+            {message.body}
+          </span>
+        ))}
+
         <BottomScroll />
       </div>
-      <ConversationInput />
+      <ConversationInput conversationId={params.conversationId} />
     </main>
   );
 };

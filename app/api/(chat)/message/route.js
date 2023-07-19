@@ -1,11 +1,12 @@
 import prismadb from "@/lib/prismadb";
-import { getSession } from "@/lib/getSession";
-import { headers } from "next/headers";
+
+import { getCurrentUserId } from "@/lib/getCurrentUserId";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const session = await getSession(headers().get("cookie") ?? "");
-  const body = req.json();
+  const currentUserId = await getCurrentUserId();
+
+  const body = await req.json();
   const { message, image, conversationId } = body;
 
   try {
@@ -18,7 +19,7 @@ export async function POST(req) {
             id: conversationId,
           },
         },
-        sender: { connect: { id: session.user.id } },
+        sender: { connect: { id: currentUserId } },
       },
       include: {
         sender: true,

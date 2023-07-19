@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import prismadb from "@/lib/prismadb";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 // REGISTER API ROUTE
 export async function POST(request) {

@@ -5,6 +5,7 @@ import { getSession } from "@/lib/getSession";
 import { getPost } from "@/lib/getPost";
 import { getFavoriteIds } from "@/lib/getFavoriteIds";
 import { getUserIdByEmail } from "@/lib/getUserIdByEmail";
+import { getCurrentUserId } from "@/lib/getCurrentUserId";
 import WishHeart from "@/components/client-components/WishHeart";
 import PostActions from "@/components/client-components/PostActions";
 import GoBack from "@/utils/GoBack";
@@ -24,7 +25,7 @@ const PostPage = async ({ params }) => {
   const session = await getSession(headers().get("cookie") ?? "");
   const currentPost = await getPost(params.postId);
   const otherUserId = await getUserIdByEmail(currentPost.userEmail);
-  const currentUserId = await getUserIdByEmail(session.user.email);
+  const currentUserId = await getCurrentUserId();
 
   const { favoritesId } = session
     ? await getFavoriteIds()
