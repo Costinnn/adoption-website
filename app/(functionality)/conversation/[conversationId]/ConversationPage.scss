@@ -3,6 +3,7 @@
 .conversation-page {
   margin-top: 80px !important;
   position: relative;
+  max-height: 100dvh;
   .conversation-header {
     background-color: globals.$second-bg2;
     position: fixed;
