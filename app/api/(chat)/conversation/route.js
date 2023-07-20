@@ -3,7 +3,14 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   const body = await req.json();
-  const { otherUserId, currentUserId, postId } = body;
+  const {
+    otherUserId,
+    currentUserId,
+    postId,
+    postName,
+    postClient,
+    postOwner,
+  } = body;
   try {
     // verify existing conversation
     const verifyExistingConversation = await prismadb.conversation.findMany({
@@ -41,6 +48,9 @@ export async function POST(req) {
           ],
         },
         post: { connect: { id: postId } },
+        name: postName,
+        postOwner: { connect: { name: postOwner } },
+        postClient: { connect: { name: postClient } },
       },
       include: {
         users: true,

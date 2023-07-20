@@ -38,6 +38,9 @@ const BlankConversation = async ({ params }) => {
         otherUserId={otherUserId}
         currentUserId={currentUserId}
         postId={params.postId}
+        postName={currentPost.title}
+        postOwner={currentPost.userName}
+        postClient={session.user.name}
       />
     </main>
   );

@@ -1,0 +1,44 @@
+@use "@/app/globals.scss";
+
+.conversationlist-page {
+  padding: 0 10px;
+  h2 {
+    margin-top: 15px;
+  }
+  .messages-container {
+    margin: 15px 0px 25px 0px;
+    .message-component {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      .postimg {
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .info {
+        display: flex;
+        flex-direction: column;
+        .username {
+          font-size: 14px;
+          font-weight: 500;
+          color: globals.$gray;
+        }
+        .convname {
+          font-weight: 500;
+          color: globals.$second-bg;
+        }
+        .lastmsg {
+          font-size: 13px;
+          color: globals.$gray;
+        }
+      }
+
+      .rightimg {
+        margin-left: auto;
+        margin-right: 10px;
+        rotate: 180deg;
+      }
+    }
+  }
+}

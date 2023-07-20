@@ -9,7 +9,14 @@ import sendImg from "@/public/icons/send.png";
 import "./ConversationInput.scss";
 import { useState } from "react";
 
-const BlankConversationInput = ({ otherUserId, currentUserId, postId }) => {
+const BlankConversationInput = ({
+  otherUserId,
+  currentUserId,
+  postId,
+  postName,
+  postOwner,
+  postClient,
+}) => {
   const router = useRouter();
   const [firstMessage, setFirstMessage] = useState("");
 
@@ -20,9 +27,9 @@ const BlankConversationInput = ({ otherUserId, currentUserId, postId }) => {
       // create new conversation
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_URL}/api/conversation`,
-        { otherUserId, currentUserId, postId }
+        { otherUserId, currentUserId, postId, postName, postClient, postOwner }
       );
-      console.log(res,'ConvInput');
+      console.log(res, "ConvInput");
       router.push(`/conversation/${res.data.id}`);
     } catch (err) {
       console.log(err);

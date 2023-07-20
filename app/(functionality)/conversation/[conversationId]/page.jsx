@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { getPost } from "@/lib/getPost";
+import { getConvImgName } from "@/lib/getConvImgName";
 import { getConversation } from "@/lib/getConversation";
 import { getCurrentUserId } from "@/lib/getCurrentUserId";
 import GoBack from "@/utils/GoBack";
@@ -12,7 +12,9 @@ import getMessages from "@/lib/getMessages";
 
 const ConversationPage = async ({ params }) => {
   const currentConversation = await getConversation(params.conversationId);
-  const currentPost = await getPost(currentConversation.postId);
+  const { convImg, userName } = await getConvImgName(
+    currentConversation.postId
+  );
   const messages = await getMessages(params.conversationId);
   const currentUserId = await getCurrentUserId();
 
@@ -24,15 +26,15 @@ const ConversationPage = async ({ params }) => {
         <GoBack width="20" height="20" customClass="go-back" />
         <Image
           className="post-img"
-          src={currentPost.images[0]}
+          src={convImg}
           alt="send"
           width={40}
           height={40}
         />
         <div>
-          <span>{currentPost.userName}</span>
+          <span>{userName}</span>
           <br />
-          <span>{currentPost.title}</span>
+          <span>{currentConversation.name}</span>
         </div>
       </div>
       <div className="conversation-box">
