@@ -19,24 +19,42 @@ const BlankConversationInput = ({
 }) => {
   const router = useRouter();
   const [firstMessage, setFirstMessage] = useState("");
+  const [isSent, setIsSent] = useState(false);
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!firstMessage) return;
 
     try {
       // create new conversation
-      const res = await axios.post(
+      const convRes = await axios.post(
         `${process.env.NEXT_PUBLIC_URL}/api/conversation`,
         { otherUserId, currentUserId, postId, postName, postClient, postOwner }
       );
-      console.log(res, "ConvInput");
-      router.push(`/conversation/${res.data.id}`);
+
+      // send first message
+      if (convRes.data.id) {
+        const msgRes = await axios.post("/api/message", {
+          message: firstMessage,
+          conversationId: convRes.data.id,
+        });
+
+        if (msgRes.data.id) {
+          setFirstMessage("");
+          setIsSent(true);
+          setTimeout(() => {
+            setIsSent(false);
+
+            // redirect to conversation page
+            router.push(`/conversation/${convRes.data.id}`);
+          }, 500);
+        }
+      }
     } catch (err) {
       console.log(err);
       return err;
     }
-
-    // create message
   };
 
   return (
@@ -46,7 +64,7 @@ const BlankConversationInput = ({
         value={firstMessage}
         onChange={(e) => setFirstMessage(e.target.value)}
       />
-      <button>
+      <button style={{ backgroundColor: isSent && "green" }}>
         <Image
           className="send"
           src={sendImg}

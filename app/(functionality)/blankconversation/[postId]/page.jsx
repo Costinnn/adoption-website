@@ -16,6 +16,7 @@ const BlankConversation = async ({ params }) => {
   const currentUserId = await getUserIdByEmail(session.user.email);
 
   console.log("BlankConversation");
+  
   return (
     <main className="section-narrow conversation-page">
       <div className="conversation-header">
