@@ -46,11 +46,6 @@ const MessagesBox = ({ initialMessages, currentUserId, conversationId }) => {
           {String(message.body)}
         </p>
       ))}
-      <p className="send">
-        Lorem ipsum dolor sit amet consectetur adipisici
-       
-      </p>
-
       <div ref={bottomRef} className="bottom-ref"></div>
     </div>
   );
