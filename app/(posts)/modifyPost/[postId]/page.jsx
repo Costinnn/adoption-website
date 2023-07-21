@@ -1,5 +1,5 @@
 import ModifyForm from "@/components/ModifyForm";
-import { getPost } from "@/lib/getPost";
+import { getPost } from "@/lib/(post)/getPost";
 
 const ModifyPost = async ({ params }) => {
   const currentPost = await getPost(params.postId);

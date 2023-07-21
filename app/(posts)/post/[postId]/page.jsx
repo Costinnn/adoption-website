@@ -1,15 +1,15 @@
 import Image from "next/image";
 
 import { headers } from "next/headers";
-import { getSession } from "@/lib/getSession";
-import { getPost } from "@/lib/getPost";
-import { getFavoriteIds } from "@/lib/getFavoriteIds";
-import { getUserIdByEmail } from "@/lib/getUserIdByEmail";
-import { getCurrentUserId } from "@/lib/getCurrentUserId";
+import { getSession } from "@/lib/(user)/getSession";
+import { getPost } from "@/lib/(post)/getPost";
+import { getFavoriteIds } from "@/lib/(post)/getFavoriteIds";
+import { getUserIdByEmail } from "@/lib/(user)/getUserIdByEmail";
+import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
 import WishHeart from "@/components/client-components/WishHeart";
 import PostActions from "@/components/client-components/PostActions";
-import GoBack from "@/utils/GoBack";
-import SendMessageRedirect from "@/utils/SendMessageRedirect";
+import GoBack from "@/components/client-components/GoBack";
+import SendMessageRedirect from "@/components/client-components/SendMessageRedirect";
 
 import male from "@/public/icons/male.png";
 import female from "@/public/icons/female.png";

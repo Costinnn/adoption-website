@@ -1,6 +1,6 @@
 import prismadb from "@/lib/prismadb";
 
-import { getCurrentUserId } from "@/lib/getCurrentUserId";
+import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {

@@ -1,8 +1,8 @@
-import { getUserPosts } from "@/lib/getUserPosts";
+import { getUserPosts } from "@/lib/(post)/getUserPosts";
 import Post from "@/components/subcomponents/Post";
 
 import "./ActivePosts.scss";
-import GoBack from "@/utils/GoBack";
+import GoBack from "@/components/client-components/GoBack";
 
 const ActivePosts = async () => {
   const allUserPosts = await getUserPosts();

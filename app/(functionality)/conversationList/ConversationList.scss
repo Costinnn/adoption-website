@@ -29,7 +29,12 @@
           color: globals.$second-bg;
         }
         .lastmsg {
-          font-size: 13px;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+        .seen {
           color: globals.$gray;
         }
       }

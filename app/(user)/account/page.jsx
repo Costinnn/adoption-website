@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { headers } from "next/headers";
-import { getSession } from "@/lib/getSession";
+import { getSession } from "@/lib/(user)/getSession";
 
 import SignoutBtn from "@/components/client-components/SignoutBtn";
 

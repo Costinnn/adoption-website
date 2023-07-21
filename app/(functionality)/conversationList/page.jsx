@@ -1,8 +1,6 @@
-import Link from "next/link";
-
-import { getUserConversations } from "@/lib/getUserConversations";
-import { getUserPosts } from "@/lib/getUserPosts";
-import MessageComponent from "@/utils/MessageComponent";
+import { getUserConversations } from "@/lib/(conv)/getUserConversations";
+import { getUserPosts } from "@/lib/(post)/getUserPosts";
+import MessageComponent from "@/components/MessageComponent";
 
 import testImg from "@/public/cat1.jpg";
 
@@ -50,7 +48,6 @@ const ConversationList = async () => {
             convId={conv.id}
             convName={conv.name}
             userName={conv.owner}
-            lastMessage={"This is last message..."}
           />
         ))}
       </div>
@@ -64,7 +61,6 @@ const ConversationList = async () => {
             convId={conv.id}
             convName={conv.name}
             userName={conv.client}
-            lastMessage={"This is last message..."}
           />
         ))}
       </div>

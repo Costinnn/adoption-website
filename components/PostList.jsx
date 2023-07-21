@@ -1,6 +1,6 @@
 import Post from "./subcomponents/Post";
-import { getSession } from "@/lib/getSession";
-import { getFavoriteIds } from "@/lib/getFavoriteIds";
+import { getSession } from "@/lib/(user)/getSession";
+import { getFavoriteIds } from "@/lib/(post)/getFavoriteIds";
 import { headers } from "next/headers";
 
 import "./PostList.scss";
@@ -18,7 +18,7 @@ const PostList = async ({ posts, title }) => {
       </div>
     );
   } else if (session) {
-    const {favoritesId} = await getFavoriteIds(session.user.email);
+    const { favoritesId } = await getFavoriteIds(session.user.email);
 
     return (
       <div className="section-narrow posts">

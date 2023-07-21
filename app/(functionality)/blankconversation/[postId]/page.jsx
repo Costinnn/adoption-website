@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { headers } from "next/headers";
 
-import GoBack from "@/utils/GoBack";
-import { getPost } from "@/lib/getPost";
-import { getUserIdByEmail } from "@/lib/getUserIdByEmail";
-import { getSession } from "@/lib/getSession";
-import BlankConversationInput from "@/components/BlankConversationInput";
+import GoBack from "@/components/client-components/GoBack";
+import { getPost } from "@/lib/(post)/getPost";
+import { getUserIdByEmail } from "@/lib/(user)/getUserIdByEmail";
+import { getSession } from "@/lib/(user)/getSession";
+import BlankConversationInput from "@/components/client-components/BlankConversationInput";
 
 import "../../conversation/[conversationId]/ConversationPage.scss";
 
@@ -16,7 +16,7 @@ const BlankConversation = async ({ params }) => {
   const currentUserId = await getUserIdByEmail(session.user.email);
 
   console.log("BlankConversation");
-  
+
   return (
     <main className="section-narrow conversation-page">
       <div className="conversation-header">

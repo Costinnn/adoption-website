@@ -1,14 +1,14 @@
 import Image from "next/image";
 
-import { getConvImgName } from "@/lib/getConvImgName";
-import { getConversation } from "@/lib/getConversation";
-import { getCurrentUserId } from "@/lib/getCurrentUserId";
-import GoBack from "@/utils/GoBack";
+import { getConvImgName } from "@/lib/(conv)/getConvImgName";
+import { getConversation } from "@/lib/(conv)/getConversation";
+import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
+import GoBack from "@/components/client-components/GoBack";
 import BottomScroll from "@/components/client-components/BottomScroll";
-import ConversationInput from "@/components/ConversationInput";
+import ConversationInput from "@/components/client-components/ConversationInput";
 
 import "./ConversationPage.scss";
-import getMessages from "@/lib/getMessages";
+import getMessages from "@/lib/(conv)/getMessages";
 
 const ConversationPage = async ({ params }) => {
   const currentConversation = await getConversation(params.conversationId);

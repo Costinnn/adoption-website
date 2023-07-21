@@ -1,4 +1,4 @@
-import { getCategory } from "@/lib/getCategory";
+import { getCategory } from "@/lib/(post)/getCategory";
 import PostList from "@/components/PostList";
 import CategoriesNav from "@/components/CategoriesNav";
 

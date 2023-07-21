@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import prismadb from "@/lib/prismadb";
-import { getSession } from "@/lib/getSession";
+import { getSession } from "@/lib/(user)/getSession";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 

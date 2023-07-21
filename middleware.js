@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSession } from "@/lib/getSession";
+import { getSession } from "@/lib/(user)/getSession";
 
 // MIDDLEWARE FUNCTION THAT REDIRECTS TO LOGIN PAGE IF NO USER IS LOGGED
 

@@ -1,11 +1,11 @@
-import { getFavoritesPosts } from "@/lib/getFavoritesPosts";
+import { getFavoritesPosts } from "@/lib/(post)/getFavoritesPosts";
 import { headers } from "next/headers";
-import { getSession } from "@/lib/getSession";
-import { getFavoriteIds } from "@/lib/getFavoriteIds";
+import { getSession } from "@/lib/(user)/getSession";
+import { getFavoriteIds } from "@/lib/(post)/getFavoriteIds";
 import Post from "@/components/subcomponents/Post";
+import GoBack from "@/components/client-components/GoBack";
 
 import "./Wishlist.scss";
-import GoBack from "@/utils/GoBack";
 
 // WISHLIST PAGE
 const Wishlist = async () => {

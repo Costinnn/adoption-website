@@ -1,6 +1,6 @@
 import CategoriesNav from "@/components/CategoriesNav";
 import PostList from "@/components/PostList";
-import { getDbPosts } from "@/lib/getDbPosts";
+import { getDbPosts } from "@/lib/(post)/getDbPosts";
 
 import "./page.scss";
 
