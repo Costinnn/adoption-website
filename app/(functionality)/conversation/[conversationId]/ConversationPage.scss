@@ -22,28 +22,36 @@
   }
   .conversation-box {
     // height: calc(100vh - 200px);
+
     overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 5px;
     padding: 10px;
     padding-top: 60px;
-    padding-bottom: 75px;
+
     .send,
     .received {
       padding: 5px 10px;
       max-width: 70%;
       border-radius: 10px;
       color: white;
+      word-wrap: break-word;
     }
 
     .send {
       align-self: flex-end;
       background-color: globals.$blue;
+      
     }
     .received {
       align-self: flex-start;
       background-color: globals.$second-bg;
+    }
+
+    .bottom-ref {
+      padding-top: 70px;
     }
   }
 }

@@ -4,11 +4,11 @@ import { getConvImgName } from "@/lib/(conv)/getConvImgName";
 import { getConversation } from "@/lib/(conv)/getConversation";
 import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
 import GoBack from "@/components/client-components/GoBack";
-import BottomScroll from "@/components/client-components/BottomScroll";
 import ConversationInput from "@/components/client-components/ConversationInput";
 
 import "./ConversationPage.scss";
 import getMessages from "@/lib/(conv)/getMessages";
+import MessagesBox from "@/components/MessagesBox";
 
 const ConversationPage = async ({ params }) => {
   const currentConversation = await getConversation(params.conversationId);
@@ -37,7 +37,12 @@ const ConversationPage = async ({ params }) => {
           <span>{currentConversation.name}</span>
         </div>
       </div>
-      <div className="conversation-box">
+      <MessagesBox
+        initialMessages={messages}
+        currentUserId={currentUserId}
+        conversationId={params.conversationId}
+      />
+      {/* <div className="conversation-box">
         {messages.map((message) => (
           <span
             className={message.senderId === currentUserId ? "send" : "received"}
@@ -48,7 +53,7 @@ const ConversationPage = async ({ params }) => {
         ))}
 
         <BottomScroll />
-      </div>
+      </div> */}
       <ConversationInput conversationId={params.conversationId} />
     </main>
   );

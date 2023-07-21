@@ -1,4 +1,5 @@
 import prismadb from "@/lib/prismadb";
+import { pusherServer } from "@/lib/pusher";
 
 import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
 import { NextResponse } from "next/server";
@@ -38,6 +39,9 @@ export async function POST(req) {
     //     },
     //   },
     // });
+
+    await pusherServer.trigger(conversationId, "message:new", newMessage);
+
     return NextResponse.json(newMessage);
   } catch (err) {
     console.log(err);
