@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { headers } from "next/dist/client/components/headers";
 
-import { getConvImgName } from "@/lib/(conv)/getConvImgName";
+import { getSession } from "@/lib/(user)/getSession";
+import { getConvImg } from "@/lib/(conv)/getConvImg";
 import { getConversation } from "@/lib/(conv)/getConversation";
 import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
 import GoBack from "@/components/client-components/GoBack";
@@ -11,14 +13,12 @@ import getMessages from "@/lib/(conv)/getMessages";
 import MessagesBox from "@/components/MessagesBox";
 
 const ConversationPage = async ({ params }) => {
+  const session = await getSession(headers().get("cookie") ?? "");
   const currentConversation = await getConversation(params.conversationId);
-  const { convImg, userName } = await getConvImgName(
-    currentConversation.postId
-  );
+  const { convImg } = await getConvImg(currentConversation.postId);
   const messages = await getMessages(params.conversationId);
   const currentUserId = await getCurrentUserId();
 
-  // console.log(currentConversation, currentPost);
   console.log("ConversationPage");
   return (
     <main className="section-narrow conversation-page">
@@ -32,7 +32,11 @@ const ConversationPage = async ({ params }) => {
           height={40}
         />
         <div>
-          <span>{userName}</span>
+          <span>
+            {session.user.name === currentConversation.owner
+              ? currentConversation.client
+              : currentConversation.owner}
+          </span>
           <br />
           <span>{currentConversation.name}</span>
         </div>
@@ -42,18 +46,6 @@ const ConversationPage = async ({ params }) => {
         currentUserId={currentUserId}
         conversationId={params.conversationId}
       />
-      {/* <div className="conversation-box">
-        {messages.map((message) => (
-          <span
-            className={message.senderId === currentUserId ? "send" : "received"}
-            key={message.id}
-          >
-            {message.body}
-          </span>
-        ))}
-
-        <BottomScroll />
-      </div> */}
       <ConversationInput conversationId={params.conversationId} />
     </main>
   );

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getConvImgName } from "@/lib/(conv)/getConvImgName";
+import { getConvImg } from "@/lib/(conv)/getConvImg";
 import getLastMessage from "@/lib/(conv)/getLastMessage";
 import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
 
@@ -10,7 +10,7 @@ import seenImg from "@/public/icons/seen.png";
 import unseenImg from "@/public/icons/unseen.png";
 
 const MessageComponent = async ({ postId, convId, convName, userName }) => {
-  const { convImg } = await getConvImgName(postId);
+  const { convImg } = await getConvImg(postId);
   const lastMessage = await getLastMessage(convId);
   const currentUserId = await getCurrentUserId();
 

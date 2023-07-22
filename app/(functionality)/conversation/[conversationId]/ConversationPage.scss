@@ -43,11 +43,20 @@
     .send {
       align-self: flex-end;
       background-color: globals.$blue;
-      
     }
     .received {
       align-self: flex-start;
       background-color: globals.$second-bg;
+    }
+
+    .lastmsg {
+      position: relative;
+      padding: 5px 25px 5px 10px;
+      > img {
+        position: absolute;
+        bottom: 0px;
+        right: 3px;
+      }
     }
 
     .bottom-ref {
