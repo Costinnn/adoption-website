@@ -27,19 +27,6 @@ export async function POST(req) {
       },
     });
 
-    // const updatedConversation = await prismadb.conversation.update({
-    //   where: {
-    //     id: conversationId,
-    //   },
-    //   data: {
-    //     messages: {
-    //       connect: {
-    //         id: newMessage.id,
-    //       },
-    //     },
-    //   },
-    // });
-
     await pusherServer.trigger(conversationId, "message:new", newMessage);
 
     return NextResponse.json(newMessage);

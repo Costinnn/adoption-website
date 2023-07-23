@@ -29,10 +29,8 @@ const PostActions = ({ isActive, postId }) => {
 
   const deletePost = async () => {
     try {
-      // delete "post" with "delete" when NextJs 13.4 bug is fixed ro request body
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}/api/deletePost`,
-        { postId }
+      const res = await axios.delete(
+        `${process.env.NEXT_PUBLIC_URL}/api/deletePost/${postId}`
       );
 
       if (res.data.id) {

@@ -2,8 +2,6 @@ import { getUserConversations } from "@/lib/(conv)/getUserConversations";
 import { getUserPosts } from "@/lib/(post)/getUserPosts";
 import MessageComponent from "@/components/MessageComponent";
 
-import testImg from "@/public/cat1.jpg";
-
 import "./ConversationList.scss";
 
 const ConversationList = async () => {
@@ -44,7 +42,6 @@ const ConversationList = async () => {
           <MessageComponent
             key={conv.id}
             postId={conv.postId}
-            convImg={testImg}
             convId={conv.id}
             convName={conv.name}
             userName={conv.owner}
@@ -57,7 +54,6 @@ const ConversationList = async () => {
           <MessageComponent
             key={conv.id}
             postId={conv.postId}
-            convImg={testImg}
             convId={conv.id}
             convName={conv.name}
             userName={conv.client}
