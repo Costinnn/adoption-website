@@ -24,8 +24,10 @@ import Link from "next/link";
 const PostPage = async ({ params }) => {
   const session = await getSession(headers().get("cookie") ?? "");
   const currentPost = await getPost(params.postId);
-  const otherUserId = await getUserIdByEmail(currentPost.userEmail);
-  const currentUserId = await getCurrentUserId();
+  const otherUserId = session
+    ? await getUserIdByEmail(currentPost.userEmail)
+    : null;
+  const currentUserId = session ? await getCurrentUserId() : null;
 
   const { favoritesId } = session
     ? await getFavoriteIds()

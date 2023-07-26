@@ -11,6 +11,9 @@ export async function middleware(request) {
     (request.nextUrl.pathname.startsWith("/account") ||
       request.nextUrl.pathname.startsWith("/accSettings") ||
       request.nextUrl.pathname.startsWith("/wishlist") ||
+      request.nextUrl.pathname.startsWith("/blankconversation") ||
+      request.nextUrl.pathname.startsWith("/conversationList") ||
+      request.nextUrl.pathname.startsWith("/conversation") ||
       request.nextUrl.pathname.startsWith("/addPost") ||
       request.nextUrl.pathname.startsWith("/modifyPost") ||
       request.nextUrl.pathname.startsWith("/activePosts") ||
@@ -34,6 +37,9 @@ export const config = {
     "/accSettings/:section*",
     "/addPost",
     "/modifyPost/:postId*",
+    "/blankconversation/:postId*",
+    "/conversation/:conversationId*",
+    "/conversationList",
     "/activePosts",
     "/wishlist",
     "/login",

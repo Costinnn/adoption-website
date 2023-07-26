@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import "./FormStyle.scss";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +25,9 @@ const RegisterForm = () => {
       if (res.data.id) {
         console.log(`${name} registered with success!`);
         setFeedback(`User ${name} created!`);
+        setTimeout(() => {
+          router.push("/login");
+        }, 1000);
       } else {
         setFeedback(res.data.error);
       }
