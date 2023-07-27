@@ -15,6 +15,7 @@
     .images-container {
       display: flex;
       gap: 5px;
+      width: fit-content;
 
       img {
         width: auto;
@@ -110,6 +111,66 @@
       height: 70px;
       object-fit: cover;
       object-position: bottom;
+    }
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .post-page {
+    .frame {
+      .images-container {
+        img {
+          width: 450px;
+          max-width: 500px;
+          max-height: 500px;
+        }
+      }
+    }
+    .date {
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .post-page {
+    .frame {
+      .images-container {
+        img {
+          width: 650px;
+          max-width: 700px;
+          max-height: 6500px;
+        }
+      }
+    }
+    .date {
+      font-size: 14px;
+    }
+    .description {
+      margin-top: 40px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1000px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .account {
+      margin-top: 40px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1000px;
+      font-size: 16px;
+    }
+    .row3 {
+      margin-top: 40px;
+      img {
+        width: 400px;
+        height: 120px;
+      }
+      span {
+        margin-top: 20px;
+        font-size: 18px;
+      }
     }
   }
 }

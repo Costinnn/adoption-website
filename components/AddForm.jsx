@@ -125,6 +125,10 @@ const AddForm = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+    // String formatting
+    email.toLowerCase();
+    //END string formatting
+
     const postToAdd = {
       title,
       desc,
@@ -171,10 +175,10 @@ const AddForm = () => {
   // console.log(imagesUrl, "url");
   // console.log(images, "imgs");
   return (
-    <form>
+    <form className="addform">
       <div className="images-input">
         <label htmlFor="images">
-          Adauga imagini
+          <span>Adauga imagini</span>
           <input
             type="file"
             name="images"

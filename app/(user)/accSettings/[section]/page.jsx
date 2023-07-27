@@ -75,7 +75,7 @@ const AccountSettings = ({ params }) => {
   return (
     <main>
       <h1>Schimba {fields.title}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="accform">
         <label htmlFor={fields.id}>{fields.label}</label>
         <input
           type={fields.type}

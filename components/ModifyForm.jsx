@@ -163,7 +163,7 @@ const ModifyForm = ({ currentPost }) => {
   // console.log(images, "imgs");
 
   return (
-    <form>
+    <form className="addform">
       <div className="images-input">
         <label htmlFor="images">
           Adauga imagini

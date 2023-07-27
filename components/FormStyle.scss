@@ -1,11 +1,13 @@
 @use "@/app/globals.scss";
-
-form {
+.accform,
+.logregform,
+.addform {
   display: flex;
   flex-direction: column;
+  max-width: 600px;
   padding: 0 20px 50px 20px;
   color: globals.$blue;
-  margin-top: 20px;
+  margin: 20px auto 0 auto;
 
   label {
     margin-top: 10px;
@@ -36,6 +38,7 @@ form {
   .group-box {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
     > select {
       margin-top: 10px;
@@ -54,9 +57,10 @@ form {
     background: linear-gradient(globals.$third-bg, globals.$third-bg2);
 
     label {
-      display: block;
-      max-width: 100%;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       > .loader {
         margin-left: 10px;
         animation: loading 2s infinite ease-in-out;
@@ -112,3 +116,58 @@ form {
   }
 }
 
+.accform{
+  .button3{
+    margin-top: 30px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .accform,
+  .logregform,
+  .addform {
+    > label {
+      margin-top: 20px;
+    }
+    input,
+    textarea,
+    select {
+      padding: 8px 25px;
+    }
+    .button1 {
+      padding: 8px 20px;
+    }
+  }
+  .addform {
+    .images-input {
+      .images-display {
+        justify-content: space-around;
+        .img-box {
+          position: relative;
+          span {
+            font-size: 19px;
+            height: 25px;
+            width: 25px;
+          }
+          img {
+            width: 100px;
+            height: 100px;
+          }
+        }
+      }
+    }
+    .group-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      > select {
+        margin-top: 10px;
+      }
+
+      > div {
+        margin-top: 10px;
+        max-width: calc(50% - 5px);
+      }
+    }
+  }
+}

@@ -49,3 +49,19 @@
     }
   }
 }
+
+@media screen and (min-width: 650px) {
+  .post-item {
+    .main-img {
+      height: 250px;
+    }
+    .info {
+      .row1,
+      .row2,
+      .row3,
+      .row4 {
+        margin-top: 10px;
+      }
+    }
+  }
+}
