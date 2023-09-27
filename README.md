@@ -71,6 +71,27 @@ This is the first project that I used Next.js and I learned about the structure 
 
 ## How to install the app on your computer
 
+### Enviroment variables:
+NODE_ENV='development' # or "production"
+
+DATABASE_URL= mongodb
+
+NEXTAUTH_SECRET=
+
+NEXTAUTH_JWT_SECRET=
+
+NEXTAUTH_URL='http://localhost:3000'
+
+NEXTAUTH_SESSION_URL='http://localhost:3000'
+
+NEXT_PUBLIC_URL='http://localhost:3000'
+
+NEXT_PUBLIC_PUSHER_APP_KEY=
+
+PUSHER_APP_ID=
+
+PUSHER_SECRET=
+
 First, download the code and run 
 ```
 npm install
