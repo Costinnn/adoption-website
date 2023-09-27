@@ -71,7 +71,7 @@ This is the first project that I used Next.js and I learned about the structure 
 
 ## How to install the app on your computer
 
-### Enviroment variables:
+### Required environment variables:
 NODE_ENV='development' # or "production"
 
 DATABASE_URL= mongodb
@@ -92,6 +92,7 @@ PUSHER_APP_ID=
 
 PUSHER_SECRET=
 
+## Run the application
 First, download the code and run 
 ```
 npm install
