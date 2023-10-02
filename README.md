@@ -1,5 +1,8 @@
 # Animal adoption website
 This is a React website, build using [Next.js v13.4.4](https://nextjs.org/) , [Prisma](https://www.prisma.io/) and [Mongo DB](https://www.mongodb.com/)
+
+<img src="https://github.com/Costinnn/adoption-website/assets/103998434/867e1e4c-0a5f-4ff7-98d6-f55b34fa9dce" width=70%>
+
 ## Introduction - project's aim
 After creating an online store using the MERN stack, I was curious about the benefits of the Next.js framework and what you could do with it, uniting both client-side and server-side rendering pages. Although at the beginning it was a little difficult to think and structure the application according to the requirements of the Next.js framework, after a few days of practice you can already see the indisputable advantages that these technologies offer developers the ability to create high-performance and efficient applications.
 
