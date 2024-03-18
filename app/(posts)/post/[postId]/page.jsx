@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { headers } from "next/headers";
 import { getSession } from "@/lib/(user)/getSession";
@@ -10,15 +11,13 @@ import WishHeart from "@/components/client-components/WishHeart";
 import PostActions from "@/components/client-components/PostActions";
 import GoBack from "@/components/client-components/GoBack";
 import SendMessageRedirect from "@/components/client-components/SendMessageRedirect";
+import ImagesFrame from "@/components/client-components/ImagesFrame";
 
-import male from "@/public/icons/male.png";
-import female from "@/public/icons/female.png";
-import map from "@/public/images/map.jpg";
 import userImg from "@/public/images/user.png";
 import phoneImg from "@/public/icons/phone.png";
+import mapImg from "@/public/icons/map.png";
 
 import "./PostPage.scss";
-import Link from "next/link";
 
 // POST PAGE
 const PostPage = async ({ params }) => {
@@ -34,41 +33,21 @@ const PostPage = async ({ params }) => {
     : { favoritesId: [] };
 
   return (
-    <main className="section-narrow post-page">
-      <GoBack width="50" height="50" customClass="go-back" />
-      <div className="frame">
-        <div className="images-container">
-          {currentPost.images.map((item) => (
-            <Image
-              src={item}
-              alt={currentPost.title}
-              key={item}
-              width={100}
-              height={100}
-            />
-          ))}
-        </div>
-      </div>
+    <main className="section-wide post-page">
+      <GoBack width="60" height="60" customClass="go-back" />
+      <ImagesFrame postImages={currentPost.images} />
       <span className="date">{String(currentPost.createdAt).slice(4, 21)}</span>
-
-      <div className="row1">
+      <div className="title-row">
         <h2>{currentPost.title}</h2>
-        {session ? (
+        {session && (
           <WishHeart
             id={currentPost.id}
             session={session}
             favoritesId={favoritesId}
           />
-        ) : (
-          <Image
-            src={currentPost.gender === "M" ? male : female}
-            width={15}
-            alt="gender"
-          />
         )}
       </div>
-
-      <div className="row2">
+      <div className="categories">
         <span className="item">{currentPost.category}</span>
         <span className="item">
           {currentPost.gender === "F" ? "Femela" : "Mascul"}
@@ -76,14 +55,21 @@ const PostPage = async ({ params }) => {
         <span className="item">{currentPost.age} ani</span>
         <span className="item">{currentPost.breed}</span>
       </div>
-
       <p className="description">{currentPost.desc}</p>
-
       <div className="account">
-        <div className="name">
-          <Image src={userImg} alt="user" width={35} height={35} />
-          <span>{currentPost.userName}</span>
+        <div className="box">
+          <div>
+            <Image src={userImg} alt="user" width={35} height={35} />
+            <span>{currentPost.userName}</span>
+          </div>
+          <div>
+            <Image src={mapImg} alt="user" width={30} height={30} />
+            <span>
+              {currentPost.city}, {currentPost.county}
+            </span>
+          </div>
         </div>
+
         {session && session.user.email !== currentPost.userEmail && (
           <div className="contact">
             <SendMessageRedirect
@@ -102,17 +88,9 @@ const PostPage = async ({ params }) => {
           </Link>
         )}
       </div>
-
-      <div className="row3">
-        <Image src={map} alt="location" width={100} height={100} />
-        <br />
-        <span>
-          {currentPost.city}, {currentPost.county}
-        </span>
-      </div>
       {session && session.user.email === currentPost.userEmail && (
         <PostActions isActive={currentPost.isActive} postId={currentPost.id} />
-      )}
+      )}{" "}
     </main>
   );
 };

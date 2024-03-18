@@ -2,43 +2,43 @@
 .navigation {
   position: fixed;
   z-index: 2;
-  width: 100%;
-  height: 80px;
   top: 0;
   left: 0;
   padding: 0 20px;
-  background: linear-gradient(to right, globals.$main-bg, globals.$main-bg2);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  background: linear-gradient(to right, globals.$main-bg2, globals.$main-bg);
 
-  img {
-    padding: 5px;
-  }
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    img {
+      padding: 5px;
+    }
+    a {
+      span {
+        display: none;
+      }
+    }
 
-  > a:nth-of-type(2) {
-    margin-left: auto;
-  }
-
-  .wishlist {
-    position: relative;
-    > span {
-      position: absolute;
-      top: -3px;
-      right: -3px;
-      background-color: globals.$main-bg2;
-      border-radius: 5px;
-      padding: 0 1px;
-      font-size: 11px;
+    > a:nth-of-type(2) {
+      margin-left: auto;
     }
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 800px) {
   .navigation {
-    justify-content: center;
-    > a:nth-of-type(2) {
-      margin-left: 500px;
+    .content {
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          display: inline;
+          color: white;
+          font-weight: 500;
+        }
+      }
     }
   }
 }

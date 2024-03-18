@@ -7,8 +7,7 @@ import { getCurrentUserId } from "@/lib/(user)/getCurrentUserId";
 import MsgCompStatus from "./subcomponents/MsgCompStatus";
 
 import rightImg from "@/public/icons/left.png";
-import seenImg from "@/public/icons/seen.png";
-import unseenImg from "@/public/icons/unseen.png";
+
 
 const MessageComponent = async ({ postId, convId, convName, userName }) => {
   const { convImg } = await getConvImg(postId);

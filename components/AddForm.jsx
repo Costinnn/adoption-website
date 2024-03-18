@@ -2,9 +2,9 @@
 
 import axios from "axios";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
-import Resizer from "react-image-file-resizer";
+//import Resizer from "react-image-file-resizer";
 
 import "./FormStyle.scss";
 
@@ -15,6 +15,7 @@ const AddForm = () => {
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("Catel");
   const [images, setImages] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
   const [age, setAge] = useState("<1");
   const [gender, setGender] = useState("M");
   const [breed, setBreed] = useState("");
@@ -22,89 +23,16 @@ const AddForm = () => {
   const [county, setCounty] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [imagesUrl, setImagesUrl] = useState([]);
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
 
   // COMPONENT FUNCTIONS
 
-  const compressImage = (file) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        500,
-        500,
-        "WEBP",
-        70,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        "base64"
-      );
-    });
-
-  const convertToBase64 = async (fileArr) => {
-    // 1. Compress and convert
-    for await (let file of fileArr) {
-      try {
-        const compressedImg = await compressImage(file);
-        setImages((prev) => [...prev, compressedImg]);
-      } catch (err) {
-        console.log(err);
-      }
+  const addUrlToImages = () => {
+    if (images.length < 5 && imageUrl.startsWith("https://i.ibb")) {
+      setImages((prev) => [...prev, imageUrl]);
     }
-
-    // 2. Convert only
-    // for await (let file of fileArr) {
-    //   const reader = new FileReader();
-
-    //   try {
-    //     reader.readAsDataURL(file);
-    //     reader.onload = () => {
-    //       setImages((prev) => [...prev, reader.result]);
-    //     };
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
-  };
-
-  const createImgUrl = (fileArr) => {
-    const imagesUrl = [];
-    fileArr.forEach((item) => imagesUrl.push(URL.createObjectURL(item)));
-    setImagesUrl((prev) => [...prev, ...imagesUrl]);
-  };
-
-  const uploadImages = async (e) => {
-    const selectedImg = [...e.target.files];
-
-    if (images.length >= 5) {
-      alert("Poti adauga maxim 5 poze!");
-    } else if (images.length + selectedImg.length > 5) {
-      const numberFilesToAdd = 5 - images.length;
-      const newSelectedImg = selectedImg.slice(0, numberFilesToAdd);
-      await convertToBase64(newSelectedImg);
-      createImgUrl(newSelectedImg);
-    } else {
-      await convertToBase64(selectedImg);
-      createImgUrl(selectedImg);
-    }
-  };
-
-  const deleteImage = (urlToDelete) => {
-    const newImagesUrl = imagesUrl.filter((urlItem, urlIndex) => {
-      if (urlItem !== urlToDelete) return urlItem;
-      if (urlItem === urlToDelete) {
-        // modify images data
-        setImages((prev) =>
-          prev.filter((imgItem, imgIndex) => imgIndex !== urlIndex)
-        );
-      }
-    });
-
-    // modify images URL data
-    setImagesUrl(newImagesUrl);
+    setImageUrl("");
   };
 
   // ADD TO DB FUNCTION
@@ -126,8 +54,6 @@ const AddForm = () => {
     setLoading(true);
     e.preventDefault();
     // String formatting
-    email.toLowerCase();
-    //END string formatting
 
     const postToAdd = {
       title,
@@ -140,10 +66,11 @@ const AddForm = () => {
       city,
       county,
       phone,
-      email,
+      email: email.toLowerCase(),
       userName: session.data.user.name,
       userEmail: session.data.user.email,
     };
+
     const res = await addPostToDb(postToAdd);
 
     if (res.data.id) {
@@ -159,40 +86,37 @@ const AddForm = () => {
       setCounty("");
       setPhone("");
       setEmail("");
-      setImagesUrl([]);
     } else if (!res.data.id) {
-      setFeedback(
-        "Nu am putut adauga anuntul tau! Pozele au mai mult de 10MB!"
-      );
+      setFeedback("Nu am putut adauga anuntul tau!");
     }
     setLoading(false);
     setTimeout(() => setFeedback(""), 10000);
   };
 
-  // SOMETIMES HAPPENS TO:
-  // !! when selecting multiple images be aware of the file name order and the order of the selected photos !!
-  // the preview of the images shows the selected photos order but when you delete one it is possible to be another photo due to the wrong file name order (from windows?)
-  // console.log(imagesUrl, "url");
-  // console.log(images, "imgs");
   return (
     <form className="addform">
       <div className="images-input">
-        <label htmlFor="images">
-          <span>Adauga imagini</span>
+        <div className="images-upload">
+          <label htmlFor="images">IMGBB URLs (max. 5)</label>
+          <br />
           <input
-            type="file"
+            pattern="https://i.ibb"
+            type="url"
             name="images"
             id="images"
-            multiple
-            accept="image/*"
-            onChange={uploadImages}
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
           />
-        </label>
+        </div>
+
+        <button type="button" className="button3" onClick={addUrlToImages}>
+          Adauga URL
+        </button>
+
         <div className="images-display">
-          {imagesUrl &&
-            imagesUrl.map((item) => (
+          {images &&
+            images.map((item) => (
               <div key={item} className="img-box">
-                <span onClick={() => deleteImage(item)}>x</span>
                 <Image src={item} alt="img" width={50} height={50} />
               </div>
             ))}
@@ -320,7 +244,7 @@ const AddForm = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       {feedback && <span>{feedback}</span>}
-      <button onClick={handleSubmit} className="button1">
+      <button onClick={(e) => handleSubmit(e)} className="button1">
         {loading ? "Adaugam anuntul tau..." : " ADAUGA"}
       </button>
     </form>

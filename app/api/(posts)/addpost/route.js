@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     const reqData = await request.json();
+
     const newPost = await prismadb.post.create({
       data: { ...reqData },
     });
@@ -13,4 +14,3 @@ export async function POST(request) {
     return NextResponse.json(err);
   }
 }
-

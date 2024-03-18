@@ -44,7 +44,7 @@ const MessagesBox = ({ initialMessages, currentUserId, conversationId }) => {
         seenMessage();
       }
 
-      console.log("MESSAGE HANDLER");
+     
     };
 
     // seenHandler replace the current last message with the updated seen message from server
@@ -78,7 +78,7 @@ const MessagesBox = ({ initialMessages, currentUserId, conversationId }) => {
     seenMessage();
   }, [seenMessage]);
 
-  console.log("MessageBox");
+
   return (
     <div className="conversation-box">
       {messages.map((message, index) => (

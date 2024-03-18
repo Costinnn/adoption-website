@@ -21,90 +21,96 @@ const ModifyForm = ({ currentPost }) => {
   const [county, setCounty] = useState(currentPost.county);
   const [phone, setPhone] = useState(currentPost.phone);
   const [email, setEmail] = useState(currentPost.email);
-  const [imagesUrl, setImagesUrl] = useState(currentPost.images);
+  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
 
   // COMPONENT FUNCTIONS
-
-  const compressImage = (file) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        500,
-        500,
-        "WEBP",
-        70,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        "base64"
-      );
-    });
-
-  const convertToBase64 = async (fileArr) => {
-    // 1. Compress and convert
-    for await (let file of fileArr) {
-      try {
-        const compressedImg = await compressImage(file);
-        setImages((prev) => [...prev, compressedImg]);
-      } catch (err) {
-        console.log(err);
-      }
+  const addUrlToImages = () => {
+    if (images.length < 5 && imageUrl.startsWith("https://i.ibb")) {
+      setImages((prev) => [...prev, imageUrl]);
     }
-
-    // 2. Convert only
-    // for await (let file of fileArr) {
-    //   const reader = new FileReader();
-
-    //   try {
-    //     reader.readAsDataURL(file);
-    //     reader.onload = () => {
-    //       setImages((prev) => [...prev, reader.result]);
-    //     };
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
+    setImageUrl("");
   };
 
-  const createImgUrl = (fileArr) => {
-    const imagesUrl = [];
-    fileArr.forEach((item) => imagesUrl.push(URL.createObjectURL(item)));
-    setImagesUrl((prev) => [...prev, ...imagesUrl]);
-  };
+  // const compressImage = (file) =>
+  //   new Promise((resolve) => {
+  //     Resizer.imageFileResizer(
+  //       file,
+  //       500,
+  //       500,
+  //       "WEBP",
+  //       70,
+  //       0,
+  //       (uri) => {
+  //         resolve(uri);
+  //       },
+  //       "base64"
+  //     );
+  //   });
 
-  const uploadImages = async (e) => {
-    const selectedImg = [...e.target.files];
+  // const convertToBase64 = async (fileArr) => {
+  //   // 1. Compress and convert
+  //   for await (let file of fileArr) {
+  //     try {
+  //       const compressedImg = await compressImage(file);
+  //       setImages((prev) => [...prev, compressedImg]);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
 
-    if (images.length >= 5) {
-      alert("Poti adauga maxim 5 poze!");
-    } else if (images.length + selectedImg.length > 5) {
-      const numberFilesToAdd = 5 - images.length;
-      const newSelectedImg = selectedImg.slice(0, numberFilesToAdd);
-      await convertToBase64(newSelectedImg);
-      createImgUrl(newSelectedImg);
-    } else {
-      await convertToBase64(selectedImg);
-      createImgUrl(selectedImg);
-    }
-  };
+  //   // 2. Convert only
+  //   // for await (let file of fileArr) {
+  //   //   const reader = new FileReader();
 
-  const deleteImage = (urlToDelete) => {
-    const newImagesUrl = imagesUrl.filter((urlItem, urlIndex) => {
-      if (urlItem !== urlToDelete) return urlItem;
-      if (urlItem === urlToDelete) {
-        // modify images data
-        setImages((prev) =>
-          prev.filter((imgItem, imgIndex) => imgIndex !== urlIndex)
-        );
-      }
-    });
+  //   //   try {
+  //   //     reader.readAsDataURL(file);
+  //   //     reader.onload = () => {
+  //   //       setImages((prev) => [...prev, reader.result]);
+  //   //     };
+  //   //   } catch (err) {
+  //   //     console.log(err);
+  //   //   }
+  //   // }
+  // };
 
-    // modify images URL data
-    setImagesUrl(newImagesUrl);
-  };
+  // const createImgUrl = (fileArr) => {
+  //   const imagesUrl = [];
+  //   fileArr.forEach((item) => imagesUrl.push(URL.createObjectURL(item)));
+  //   setImagesUrl((prev) => [...prev, ...imagesUrl]);
+  // };
+
+  // const uploadImages = async (e) => {
+  //   const selectedImg = [...e.target.files];
+
+  //   if (images.length >= 5) {
+  //     alert("Poti adauga maxim 5 poze!");
+  //   } else if (images.length + selectedImg.length > 5) {
+  //     const numberFilesToAdd = 5 - images.length;
+  //     const newSelectedImg = selectedImg.slice(0, numberFilesToAdd);
+  //     await convertToBase64(newSelectedImg);
+  //     createImgUrl(newSelectedImg);
+  //   } else {
+  //     await convertToBase64(selectedImg);
+  //     createImgUrl(selectedImg);
+  //   }
+  // };
+
+  // const deleteImage = (urlToDelete) => {
+  //   const newImagesUrl = imagesUrl.filter((urlItem, urlIndex) => {
+  //     if (urlItem !== urlToDelete) return urlItem;
+  //     if (urlItem === urlToDelete) {
+  //       // modify images data
+  //       setImages((prev) =>
+  //         prev.filter((imgItem, imgIndex) => imgIndex !== urlIndex)
+  //       );
+  //     }
+  //   });
+
+  //   // modify images URL data
+  //   setImagesUrl(newImagesUrl);
+  // };
 
   // ADD TO DB FUNCTION
   const modifyDbPost = async (postModified) => {
@@ -165,22 +171,27 @@ const ModifyForm = ({ currentPost }) => {
   return (
     <form className="addform">
       <div className="images-input">
-        <label htmlFor="images">
-          Adauga imagini
+        <div className="images-upload">
+          <label htmlFor="images">IMGBB URLs (max. 5)</label>
+          <br />
           <input
-            type="file"
+            pattern="https://i.ibb"
+            type="url"
             name="images"
             id="images"
-            multiple
-            accept="image/*"
-            onChange={uploadImages}
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
           />
-        </label>
+        </div>
+
+        <button type="button" className="button3" onClick={addUrlToImages}>
+          Adauga URL
+        </button>
+
         <div className="images-display">
-          {imagesUrl &&
-            imagesUrl.map((item) => (
+          {images &&
+            images.map((item) => (
               <div key={item} className="img-box">
-                <span onClick={() => deleteImage(item)}>x</span>
                 <Image src={item} alt="img" width={50} height={50} />
               </div>
             ))}

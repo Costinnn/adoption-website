@@ -1,0 +1,28 @@
+#sw-js-blob-svg {
+  width: 100vw;
+  height: 70vw;
+  @media screen and (min-width: 600px) {
+    width: 600px;
+    height: 500px;
+  }
+}
+
+.bottom-wave {
+  margin-top: -25px;
+  position: relative;
+  z-index: -1;
+}
+
+.top-wave {
+  margin-bottom: -40px;
+  position: relative;
+  z-index: -1;
+}
+@media screen and (min-width: 600px) {
+  .top-wave {
+    margin-bottom: -7vw;
+  }
+  .bottom-wave {
+    margin-top: -5vw;
+  }
+}

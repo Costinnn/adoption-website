@@ -1,62 +1,57 @@
 @use "@/app/globals.scss";
 
 .post-page {
-  padding: 0 10px;
   position: relative;
+  margin-bottom: 50px;
+
   .go-back {
     position: absolute;
     top: 0px;
     left: 10px;
     padding: 10px;
   }
-  .frame {
-    width: 100%;
-    overflow-x: scroll;
-    .images-container {
-      display: flex;
-      gap: 5px;
-      width: fit-content;
 
-      img {
-        width: auto;
-        height: auto;
-        max-width: 95%;
-        max-height: 300px;
-        object-fit: cover;
-        object-position: center;
-      }
-    }
-  }
   .date {
-    font-size: 12px;
-    color: globals.$gray;
+    font-size: 13px;
+    color: globals.$main-bg22;
+    padding-left: 20px;
   }
 
-  .row1 {
+  .title-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 10px;
+    padding: 0 20px;
     > img {
       width: 35px;
       height: 35px;
     }
   }
 
-  .row2 {
+  .categories {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 5px;
     margin-top: 10px;
+    padding: 0 20px;
     .item {
-      color: globals.$gray;
-      border: 1px solid globals.$gray;
-      border-radius: 5px;
-      padding: 1px 5px;
+      text-wrap: nowrap;
+      text-transform: capitalize;
+      background-color: globals.$main-bg22;
+      color: white;
+      border-radius: 10px;
+      padding: 5px 10px;
     }
   }
 
   .description {
-    margin-top: 20px;
+    margin: 20px 20px 0 20px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   }
 
   .account {
@@ -64,113 +59,85 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    padding: 10px;
+    padding: 20px;
     margin-top: 30px;
     font-size: 14px;
-    background-color: globals.$third-bg2;
-    .name {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .login-redirect {
-      text-align: center;
-      max-width: 300px;
-    }
-    .contact {
+    background-color: globals.$second-bg2;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    .box {
       width: 100%;
       display: flex;
       justify-content: space-around;
 
+      div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-transform: capitalize;
+        font-weight: 600;
+        font-size: 16px;
+        color: white;
+      }
+    }
+
+    .login-redirect {
+      text-align: center;
+      max-width: 300px;
+      margin-top: 20px;
+      font-size: 16px;
+      color: white;
+      text-decoration: underline;
+    }
+
+    .contact {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
       a,
       span {
-        min-width: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 5px;
-        border: 1px solid globals.$second-bg;
-        padding: 5px;
+        padding: 5px 20px;
         border-radius: 10px;
         font-weight: 500;
-        color: globals.$second-bg;
-
+        font-size: 16px;
+        color: white;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        background-color: globals.$main-bg2;
         img {
           color: globals.$second-bg;
         }
       }
     }
   }
-
-  .row3 {
-    text-align: center;
-    margin-top: 5px;
-    img {
-      width: 300px;
-      height: 70px;
-      object-fit: cover;
-      object-position: bottom;
-    }
-  }
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 800px) {
   .post-page {
-    .frame {
-      .images-container {
-        img {
-          width: 450px;
-          max-width: 500px;
-          max-height: 500px;
-        }
+    .date {
+      display: block;
+      text-align: center;
+    }
+    .title-row {
+      max-width: 800px;
+      margin: 20px auto 0 auto;
+      h2 {
+        font-size: 40px;
       }
     }
-    .date {
-      font-size: 14px;
+    .description {
+      max-width: 800px;
+      margin: 20px auto 0 auto;
+      font-size: 18px;
     }
   }
 }
 
 @media screen and (min-width: 900px) {
-  .post-page {
-    .frame {
-      .images-container {
-        img {
-          width: 650px;
-          max-width: 700px;
-          max-height: 6500px;
-        }
-      }
-    }
-    .date {
-      font-size: 14px;
-    }
-    .description {
-      margin-top: 40px;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 1000px;
-      text-align: center;
-      font-size: 18px;
-    }
-    .account {
-      margin-top: 40px;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 1000px;
-      font-size: 16px;
-    }
-    .row3 {
-      margin-top: 40px;
-      img {
-        width: 400px;
-        height: 120px;
-      }
-      span {
-        margin-top: 20px;
-        font-size: 18px;
-      }
-    }
-  }
 }

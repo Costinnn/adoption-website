@@ -10,6 +10,7 @@
     gap: 15px;
     margin-top: 10px;
     padding-bottom: 10px;
+    
     .item {
       display: flex;
       flex-direction: column;
@@ -39,6 +40,13 @@
         background-color: #c68866;
       }
     }
+  }
+  .container::-webkit-scrollbar {
+    display: none;
+  }
+  .container {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
 

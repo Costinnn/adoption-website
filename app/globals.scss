@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-$main-bg: #0e60ff;
-$main-bg2: #9e3bff;
+$main-bg: #5961f9;
+$main-bg2: #ee9ae5;
+$main-bg21: #f87537;
+$main-bg22: #fba81f;
+
 $second-bg: #8fa5ff;
 $second-bg2: #c397ff;
 $third-bg: #e9f0ff;
@@ -10,6 +13,8 @@ $blue: #2967be;
 $orange: #ff8e34;
 $gray: #8d918d;
 
+// rgba(89, 97, 249, 1)
+// rgba(238, 154, 229, 1)
 * {
   box-sizing: border-box;
   margin: 0;
@@ -97,7 +102,7 @@ a:active {
 }
 
 .button5 {
-  background-color: red;
+  background-color: $main-bg21;
 }
 
 .acc-link {
